@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+    <div class="album py-5">
+        <div class="container">
+
+            <div class="row">
+                <h1>Contactez-nous !</h1>
+                <form id="contactForm">
+                    <div class="mb-3">
+                        <label class="form-label" for="name">Nom</label>
+                        <input class="form-control" id="name" type="text" placeholder="Nom" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="name">Prénom</label>
+                        <input class="form-control" id="name" type="text" placeholder="Prénom" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="emailAddress">E-mail</label>
+                        <input class="form-control" id="emailAddress" type="email" placeholder="E-mail" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="tel">Téléphone</label>
+                        <input class="form-control" id="tel" type="tel" placeholder="Téléphone" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="message">Message</label>
+                        <textarea class="form-control" id="message" type="text" placeholder="Message" style="height: 10rem;"></textarea>
+                    </div>
+
+                    <div class="d-grid mb-3">
+                        <button class="btn btn-primary btn-lg" type="submit">Envoyer</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

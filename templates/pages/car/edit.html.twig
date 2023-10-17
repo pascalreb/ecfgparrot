@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+
+        <h1 class="mt-4">Modification du véhicule</h1>
+
+        {{ form_start(form) }}
+
+        <div class="form-group">
+            {{ form_label(form.brand) }}
+            {{ form_widget(form.brand) }}
+            <div class="form-error">
+                {{ form_errors(form.brand) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.model) }}
+            {{ form_widget(form.model) }}
+            <div class="form-error">
+                {{ form_errors(form.model) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.year) }}
+            {{ form_widget(form.year) }}
+            <div class="form-error">
+                {{ form_errors(form.year) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.energy) }}
+            {{ form_widget(form.energy) }}
+            <div class="form-error">
+                {{ form_errors(form.energy) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.kilometers) }}
+            {{ form_widget(form.kilometers) }}
+            <div class="form-error">
+                {{ form_errors(form.kilometers) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.price) }}
+            {{ form_widget(form.price) }}
+            <div class="form-error">
+                {{ form_errors(form.price) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_row(form.submit) }}
+        </div>
+
+        {{ form_end(form) }}
+
+    </div>
+{% endblock %}

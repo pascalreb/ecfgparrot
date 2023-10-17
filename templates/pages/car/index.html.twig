@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Occasions{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        {% if not cars.items is same as([]) %}
+            <h1>Mes véhicules</h1>
+
+            <a href="{{ path('app_newOccasions') }}" class="btn btn-primary">Ajouter un véhicule</a>
+
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success mt-4">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            <div class="count mt-4">
+                Il y a {{ cars.getTotalItemCount }} véhicules au total.
+            </div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Numéro</th>
+                    <th scope="col">Marque</th>
+                    <th scope="col">Modèle</th>
+                    <th scope="col">Année</th>
+                    <th scope="col">Energie</th>
+                    <th scope="col">Kilométrage</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Date de création</th>
+                    <th scope="col">Edition</th>
+                    <th scope="col">Suppression</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for car in cars %}
+                    <tr class="table-primary">
+                        <th scope="row">{{ car.id }}</th>
+                        <td>{{ car.brand }}</td>
+                        <td>{{ car.model }}</td>
+                        <td>{{ car.year }}</td>
+                        <td>{{ car.energy }}</td>
+                        <td>{{ car.kilometers }}</td>
+                        <td>{{ car.price }}</td>
+                        <td>{{ car.createdAt|date('d/m/y') }}</td>
+                        <td><a href="{{ path('app_editOccasions', { id: car.id }) }}" class="btn btn-info">Modifier</a></td>
+                        <td><a href="{{ path('app_deleteOccasions', { id: car.id }) }}" class="btn btn-danger">Supprimer</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="navigation d-flex justify-content-center mt-4">
+                {{ knp_pagination_render(cars) }}
+            </div>
+        {% else %}
+            Il n'y a pas de véhicules.
+        {% endif %}
+    </div>
+{% endblock %}

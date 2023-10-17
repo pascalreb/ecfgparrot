@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+
+    <h1 class="m-4 text-center"><span>Parrot</span> quart de tour !</h1>
+
+    <section class="article1 d-flex justify-content-center align-items-center container-sm">
+        <div>
+            <div class="text-justify">
+                <h2 id="carrosserie" class="m-4 text-center">Carrosserie</h2>
+                <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                    nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                    nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+            </div>
+            <div class="m-4 text-center">
+                <img src="Assets/porsche.jpg" alt="porsche">
+            </div>
+    </section>
+
+    <section class="article2 d-flex justify-content-center align-items-center container-sm">
+        <div class="d-flex justify-content-center">
+        </div>
+        <div class="text-justify">
+            <h2 id="mécanique" class="m-4 text-center">Mécanique</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+            <div class="m-4 text-center">
+                <img src="Assets/moteur.jpg" alt="moteur">
+            </div>
+        </div>
+        </div>
+
+    </section>
+
+    <section class="container-sm">
+        <h2>Témoignages</h2>
+
+        <div>
+            <div class="card" style="margin: 10px;">
+                <div class="card-body">
+                    <h3 class="card-title"></h3>
+                    <p class="card-name"><b><?= htmlentities($row['name']) ?> :</b></p>
+                    <p class="card-message"><?= htmlentities($row['message']) ?></p>
+                    <p class="card-mark fw-bold" style="color: red"><?= htmlentities($row['mark']) ?>/5</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+{% endblock %}
