@@ -6,6 +6,12 @@
 
     <h1 class="m-4 text-center"><span>Parrot</span> quart de tour !</h1>
 
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success mt-4">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     <section class="article1 d-flex justify-content-center align-items-center container-sm">
         <div>
             <div class="text-justify">
