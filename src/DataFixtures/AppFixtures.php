@@ -2,12 +2,13 @@
 
 namespace App\DataFixtures;
 
+use Faker\Factory;
 use App\Entity\Car;
 use App\Entity\User;
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
-use Faker\Factory;
 use Faker\Generator;
+use App\Entity\Opinion;
+use Doctrine\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 
 class AppFixtures extends Fixture
 {
@@ -24,7 +25,7 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         // Cars
-        for ($i = 1; $i <= 25; $i++) {
+        for ($i = 0; $i < 25; $i++) {
             $car = new Car();
             $car->setBrand($this->faker->word())
                 ->setModel($this->faker->word())
@@ -44,7 +45,17 @@ class AppFixtures extends Fixture
                 ->setPlainPassword('password');
 
             $manager->persist($user);
+        }
 
+        // Opinions
+        for ($i = 0; $i < 20; $i++) {
+            $opinion = new Opinion();
+            $opinion->setName($this->faker->name())
+                ->setMessage($this->faker->text(100))
+                ->setMark(mt_rand(1, 5))
+                ->setIsApproved(mt_rand(0, 1) == 1 ? true : false);
+
+            $manager->persist($opinion);
         }
 
         $manager->flush();

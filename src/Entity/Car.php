@@ -34,7 +34,7 @@ class Car
     #[Assert\NotBlank()]
     private ?string $energy = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
+    #[ORM\Column]
     #[Assert\NotBlank()]
     #[Assert\Positive()]
     #[Assert\Length(min: 3, max: 6)]

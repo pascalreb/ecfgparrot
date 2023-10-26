@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Avis{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+
+        {% if not opinions.items is same as([]) %}
+            <h1>Nos avis</h1>
+
+            <a href="{{ path('app_newOpinion') }}" class="btn btn-primary">Ajouter un avis</a>
+
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success mt-4">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            <div class="count mt-4">
+                Il y a {{ opinions.getTotalItemCount }} avis au total.
+            </div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Numéro</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Message</th>
+                    <th scope="col">Note</th>
+                    <th scope="col">Date de création</th>
+                    <th scope="col">Validation</th>
+                    <th scope="col">Suppression</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for opinion in opinions %}
+                    <tr class="table-primary">
+                        <th scope="row">{{ opinion.id }}</th>
+                        <td>{{ opinion.name }}</td>
+                        <td>{{ opinion.message }}</td>
+                        <td>{{ opinion.mark }}</td>
+                        <td>{{ opinion.createdAt|date('d/m/y') }}</td>
+                        <td><a href="{{ path('app_editOpinion', { id: opinion.id }) }}" class="btn btn-info">Valider</a></td>
+                        <td><a href="{{ path('app_deleteOpinion', { id: opinion.id }) }}" class="btn btn-danger">Supprimer</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="navigation d-flex justify-content-center mt-4">
+                {{ knp_pagination_render(opinions) }}
+            </div>
+        {% else %}
+            Il n'y a pas d'avis.
+        {% endif %}
+    </div>
+{% endblock %}

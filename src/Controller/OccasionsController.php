@@ -7,16 +7,18 @@ use App\Form\CarType;
 use App\Repository\CarRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class OccasionsController extends AbstractController
 {
     /*
     * This controller displays all cars with a pagination
     */
+    #[IsGranted('ROLE_USER')]
     #[Route('/car', name: 'app_occasions')]
     public function index(CarRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
@@ -31,9 +33,28 @@ class OccasionsController extends AbstractController
             'cars' => $cars
         ]);
     }
+
+    /*
+     * This controller displays all recipes which are public
+     */
+    #[Route('/car/public', name: 'app_publicOccasions', methods: ['GET'])]
+    public function indexPublic(CarRepository $repository, PaginatorInterface $paginator, Request $request): Response
+    {
+        $cars = $paginator->paginate(
+            $repository->findAll(), /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            50 /*limit per page*/
+        );
+
+        return $this->render('pages/car/index_public.html.twig', [
+            'cars' => $cars,
+        ]);
+    }
+
     /*
      * This controller allows to create an ingredient
      */
+    #[IsGranted('ROLE_USER')]
     #[Route('/car/new', name: 'app_newOccasions', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
@@ -49,7 +70,7 @@ class OccasionsController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Votre voiture a été créée avec succès !'
+                'Votre véhicule a été créé avec succès !'
             );
 
             return $this->redirectToRoute('app_occasions');
@@ -78,7 +99,7 @@ class OccasionsController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Votre voiture a été modifiée avec succès !'
+                'Votre véhicule a été modifié avec succès !'
             );
 
             return $this->redirectToRoute('app_occasions');
@@ -100,7 +121,7 @@ class OccasionsController extends AbstractController
 
         $this->addFlash(
             'success',
-            'Votre voiture a été supprimée avec succès !'
+            'Votre véhicule a été supprimé avec succès !'
         );
 
         return $this->redirectToRoute('app_occasions');

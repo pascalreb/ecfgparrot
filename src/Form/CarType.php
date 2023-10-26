@@ -103,9 +103,8 @@ class CarType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-primary mt-4 mb-4',
                 ],
-                'label' => 'Créer mon véhicule',
-            ])
-        ;
+                'label' => 'Créer le véhicule',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

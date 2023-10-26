@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Avis;
+use App\Entity\Opinion;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class AvisType extends AbstractType
+class OpinionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -60,19 +60,19 @@ class AvisType extends AbstractType
                     new Assert\LessThan(6),
                 ]
             ])
-            ->add('submit', SubmitType::class , [
+            ->add('submit', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary mt-4 mb-4',
+                    'style' => 'width:100%',
                 ],
                 'label' => 'Envoyer',
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Avis::class,
+            'data_class' => Opinion::class,
         ]);
     }
 }

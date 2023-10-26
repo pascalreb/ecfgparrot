@@ -16,7 +16,7 @@
         <div>
             <div class="text-justify">
                 <h2 id="carrosserie" class="m-4 text-center">Carrosserie</h2>
-                <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                <p style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                     sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
                     nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
@@ -30,40 +30,42 @@
             <div class="m-4 text-center">
                 <img src="Assets/porsche.jpg" alt="porsche">
             </div>
+        </div>
     </section>
 
     <section class="article2 d-flex justify-content-center align-items-center container-sm">
         <div class="d-flex justify-content-center">
-        </div>
-        <div class="text-justify">
-            <h2 id="mécanique" class="m-4 text-center">Mécanique</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-            <div class="m-4 text-center">
-                <img src="Assets/moteur.jpg" alt="moteur">
+            <div style="text-align: justify;">
+                <h2 id="mécanique" class="m-4 text-center">Mécanique</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                    nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                <div class="m-4 text-center">
+                    <img src="Assets/moteur.jpg" alt="moteur">
+                </div>
             </div>
         </div>
-        </div>
-
     </section>
 
     <section class="container-sm">
-        <h2>Témoignages</h2>
 
-        <div>
-            <div class="card" style="margin: 10px;">
-                <div class="card-body">
-                    <h3 class="card-title"></h3>
-                    <p class="card-name"><b><?= htmlentities($row['name']) ?> :</b></p>
-                    <p class="card-message"><?= htmlentities($row['message']) ?></p>
-                    <p class="card-mark fw-bold" style="color: red"><?= htmlentities($row['mark']) ?>/5</p>
-                </div>
-            </div>
+            <h2>Témoignages</h2>
 
-        </div>
+            {# <div class="d-flex justify-content-between flex-wrap">
+                {% for opinion in opinions %}
+                    <div class="card" style="margin: 10px;">
+                        <div class="card-body">
+                            <h3 class="card-title"></h3>
+                            <p class="card-name"><b>{{ opinion.name }}</b></p>
+                            <p class="card-message">{{ opinion.message }}</p>
+                            <p class="card-mark fw-bold" style="color: red">{{ opinion.mark }}/5</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div> #}
+        
     </section>
 
 {% endblock %}

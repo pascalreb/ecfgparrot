@@ -18,7 +18,8 @@ class UserController extends AbstractController
     * This controller allows to edit user's profile
     */
     #[Route('/user/edition/{id}', name: 'app_editUser', methods: ['GET', 'POST'])]
-    public function edit(User $user, Request $request, EntityManagerInterface $manager): Response
+    public function edit(User $user, Request $request, EntityManagerInterface $manager,
+                         UserPasswordHasherInterface $hasher): Response
     {
         if(!$this->getUser()) {
             return $this->redirectToRoute('app_loginSecurity');
@@ -32,18 +33,27 @@ class UserController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $user = $form->getData();
 
-            $manager->persist($user);
-            $manager->flush();
+            if($hasher->isPasswordValid($user, $form->getData()->getPlainPassword()))
+            {
+                $user = $form->getData();
 
-            $this->addFlash(
-                'success',
-                'Les informations ont été modifiées avec succès !'
-            );
+                $manager->persist($user);
+                $manager->flush();
 
-            return $this->redirectToRoute('app_home');
+                $this->addFlash(
+                    'success',
+                    'Les informations ont été modifiées avec succès !'
+                );
 
+                return $this->redirectToRoute('app_home');
+
+            } else {
+                $this->addFlash(
+                    'warning',
+                    'Le mot de passe renseigné est incorrect !'
+                );
+            }
         }
 
         return $this->render('pages/user/edit.html.twig', [
