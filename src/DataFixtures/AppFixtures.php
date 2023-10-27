@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use Faker\Factory;
 use App\Entity\Car;
+use App\Entity\Hour;
 use App\Entity\User;
 use Faker\Generator;
 use App\Entity\Opinion;
@@ -57,6 +58,8 @@ class AppFixtures extends Fixture
 
             $manager->persist($opinion);
         }
+
+
 
         $manager->flush();
     }

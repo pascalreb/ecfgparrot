@@ -3,15 +3,17 @@
 namespace App\Form;
 
 use App\Entity\Car;
+use App\Entity\Image;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\MoneyType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class CarType extends AbstractType
 {
@@ -86,11 +88,11 @@ class CarType extends AbstractType
             ])
             ->add('price', MoneyType::class, [
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control mb-4',
                     'minlength' => '4',
                     'maxlength' => '6',
                 ],
-                'label' => 'Prix',
+                'label' => 'Prix en ',
                 'label_attr' => [
                     'class' => 'form-label mt-4',
                 ],
@@ -99,6 +101,16 @@ class CarType extends AbstractType
                     new Assert\Length(['min' => 4, 'max' => 6]),
                 ]
             ])
+            // ->add('images', FileType::class, [
+            //     'label' => false,
+            //     'multiple' => true,
+            //     'mapped' => false,
+            //     'required' => false,
+            //     'label_attr' => [
+            //         'class' => 'form-label mt-4',
+            //     ],
+
+            // ])
             ->add('submit', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary mt-4 mb-4',
