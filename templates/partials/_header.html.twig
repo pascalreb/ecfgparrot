@@ -1,7 +1,8 @@
 
 <nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ path('app_home') }}"><img src={{ asset('uploads/logoParrot.png') }} alt="logo garage V. Parrot"></a>
+        <a class="navbar-brand" href="{{ path('app_home') }}"><img src={{ asset('uploads/logoParrot.png') }} 
+            alt="logo garage V. Parrot"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" 
         aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -18,11 +19,14 @@
                         <a class="nav-link" href="{{ path('app_opinion') }}">Avis</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" 
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" 
+                        aria-haspopup="true" 
                         aria-expanded="false">{{ app.user.email }}</a>
                         <div class="dropdown-menu" style="width: 15rem;">
-                            <a class="dropdown-item" href="{{ path('app_editUser', {id : app.user.id}) }}">Modifier mes informations</a>
-                            <a class="dropdown-item" href="{{ path('app_editPasswordUser', {id : app.user.id}) }}">Modifier mon mot de passe</a>
+                            <a class="dropdown-item" href="{{ path('app_editUser', {id : app.user.id}) }}">
+                                Modifier mes informations</a>
+                            <a class="dropdown-item" href="{{ path('app_editPasswordUser', {id : app.user.id}) }}">
+                                Modifier mon mot de passe</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ path('app_logoutSecurity') }}">Déconnexion</a>
                         </div>

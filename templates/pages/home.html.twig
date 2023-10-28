@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <h1 class="m-4 text-center"><span>Parrot</span> quart de tour !</h1>
+    <h1 class="m-5 text-center">Garage Vincent PARROT</h1>
 
     {% for message in app.flashes('success') %}
         <div class="alert alert-success mt-4">
@@ -12,41 +12,35 @@
         </div>
     {% endfor %}
 
-    <section class="article1 d-flex justify-content-center align-items-center container-sm">
-        <div>
-            <div class="text-justify">
-                <h2 id="carrosserie" class="m-4 text-center">Carrosserie</h2>
-                <p style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                    nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                    nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-            </div>
-            <div class="m-4 text-center">
-                <img src="Assets/porsche.jpg" alt="porsche">
-            </div>
-        </div>
-    </section>
+    <section class="container-sm d-flex flex-column">
+            <h2 class="m-4 text-center">Réparation carrosserie</h2>
+            <div class="m-4 mx-auto">
 
-    <section class="article2 d-flex justify-content-center align-items-center container-sm">
-        <div class="d-flex justify-content-center">
-            <div style="text-align: justify;">
-                <h2 id="mécanique" class="m-4 text-center">Mécanique</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                    nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                <div class="m-4 text-center">
-                    <img src="Assets/moteur.jpg" alt="moteur">
-                </div>
+                    <i class="fa-solid fa-gear m-3"></i> Réparation plastique<br>
+                    <i class="fa-solid fa-gear m-3"></i> Réparation optique<br>
+                    <i class="fa-solid fa-gear m-3"></i> Vitrage<br>
+                    <i class="fa-solid fa-gear m-3"></i> Réparation carrosserie rapide<br>
             </div>
-        </div>
+        </section>
+        <section>
+
+            <img src={{ asset('uploads/douilles.jpg') }} class="container-fluid" alt="douilles cliquet" 
+            style="width: 100%; padding: 0;">
+        </section>
+
+    <section class="container-sm d-flex flex-column">
+            <h2 class="m-4 text-center">Entretien du véhicule</h2>
+            <div class="m-4 mx-auto">
+                    <i class="fa-solid fa-wrench m-3"></i> Révision vidange<br>
+                    <i class="fa-solid fa-wrench m-3"></i> Climatisation<br>
+                    <i class="fa-solid fa-wrench m-3"></i> Embrayage<br>
+                    <i class="fa-solid fa-wrench m-3"></i> Courroie de distribution<br>
+                    <i class="fa-solid fa-wrench m-3"></i> Amortisseurs<br>
+                    <i class="fa-solid fa-wrench m-3"></i> Disques et plaquettes<br>
+                    <i class="fa-solid fa-wrench m-3"></i> Diagnostic électronique<br>
+                    <i class="fa-solid fa-wrench m-3"></i> Géométrie et parallélisme<br>
+            </div>
+            
     </section>
 
     <section class="container-sm">
