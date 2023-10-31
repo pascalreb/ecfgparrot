@@ -15,37 +15,30 @@
     <section class="container-sm d-flex flex-column">
             <h2 class="m-4 text-center">Réparation carrosserie</h2>
             <div class="m-4 mx-auto">
-
-                    <i class="fa-solid fa-gear m-3"></i> Réparation plastique<br>
-                    <i class="fa-solid fa-gear m-3"></i> Réparation optique<br>
-                    <i class="fa-solid fa-gear m-3"></i> Vitrage<br>
-                    <i class="fa-solid fa-gear m-3"></i> Réparation carrosserie rapide<br>
+                <i class="fa-solid fa-gear m-3"></i> Réparation plastique<br>
+                <i class="fa-solid fa-gear m-3"></i> Réparation optique<br>
+                <i class="fa-solid fa-gear m-3"></i> Vitrage<br>
+                <i class="fa-solid fa-gear m-3"></i> Réparation carrosserie rapide<br>
             </div>
-        </section>
-        <section>
-
-            <img src={{ asset('uploads/douilles.jpg') }} class="container-fluid" alt="douilles cliquet" 
-            style="width: 100%; padding: 0;">
-        </section>
-
+    </section>
+        
     <section class="container-sm d-flex flex-column">
             <h2 class="m-4 text-center">Entretien du véhicule</h2>
             <div class="m-4 mx-auto">
-                    <i class="fa-solid fa-wrench m-3"></i> Révision vidange<br>
-                    <i class="fa-solid fa-wrench m-3"></i> Climatisation<br>
-                    <i class="fa-solid fa-wrench m-3"></i> Embrayage<br>
-                    <i class="fa-solid fa-wrench m-3"></i> Courroie de distribution<br>
-                    <i class="fa-solid fa-wrench m-3"></i> Amortisseurs<br>
-                    <i class="fa-solid fa-wrench m-3"></i> Disques et plaquettes<br>
-                    <i class="fa-solid fa-wrench m-3"></i> Diagnostic électronique<br>
-                    <i class="fa-solid fa-wrench m-3"></i> Géométrie et parallélisme<br>
+                <i class="fa-solid fa-wrench m-3"></i> Révision vidange<br>
+                <i class="fa-solid fa-wrench m-3"></i> Climatisation<br>
+                <i class="fa-solid fa-wrench m-3"></i> Embrayage<br>
+                <i class="fa-solid fa-wrench m-3"></i> Courroie de distribution<br>
+                <i class="fa-solid fa-wrench m-3"></i> Amortisseurs<br>
+                <i class="fa-solid fa-wrench m-3"></i> Disques et plaquettes<br>
+                <i class="fa-solid fa-wrench m-3"></i> Diagnostic électronique<br>
+                <i class="fa-solid fa-wrench m-3"></i> Géométrie et parallélisme<br>
             </div>
-            
     </section>
 
     <section class="container-sm">
 
-            <h2>Témoignages</h2>
+            <h2 class="m-4 text-center">Témoignages</h2>
 
             {# <div class="d-flex justify-content-between flex-wrap">
                 {% for opinion in opinions %}
@@ -60,6 +53,11 @@
                 {% endfor %}
             </div> #}
         
+    </section>
+
+    <section>
+        <img src={{ asset('uploads/douilles.jpg') }} class="container-fluid" alt="douilles cliquet" 
+        style="width: 100%; padding: 0;">
     </section>
 
 {% endblock %}

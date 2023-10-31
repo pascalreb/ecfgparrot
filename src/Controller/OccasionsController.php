@@ -3,13 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\Car;
+use App\Entity\Image;
 use App\Form\CarType;
 use App\Repository\CarRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -60,10 +63,30 @@ class OccasionsController extends AbstractController
     {
         $car = new Car();
         $form = $this->createForm(CarType::class, $car);
-
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $car = $form->getData();
+
+            // On récupère les images transmises
+            $images = $form->get('images')->getData();
+
+            // On boucle sur les images
+            foreach ($images as $image) {
+                // On génère un nouveaeu nom de fichier pour éviter que 2 images aient le même nom
+                $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+
+                // On copie le fichier dans le dossier uploads
+                $image->move(
+                    $this->getParameter('images_directory'),
+                    $fichier
+                );
+
+                // On stocke l'image (son nom) dans la bdd
+                $img = new Image();
+                $img->setName($fichier);
+                $car->addImage($img);
+            }
 
             $manager->persist($car);
             $manager->flush();
@@ -77,24 +100,45 @@ class OccasionsController extends AbstractController
         }
 
         return $this->render('pages/car/new.html.twig', [
-            'form' => $form->createView()
+            'car' => $car,
+            'form' => $form->createView(),
         ]);
     }
 
     /*
      * This controller allows to modify a car
      */
+    #[IsGranted('ROLE_USER')]
     #[Route('/car/edition/{id}', name: 'app_editOccasions', methods: ['GET', 'POST'])]
     public function edit(CarRepository $repository, int $id, Request $request, EntityManagerInterface $manager): Response
     {
         $car = $repository->findOneBy(["id" => $id]);
         $form = $this->createForm(CarType::class, $car);
-
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $ingredient = $form->getData();
 
-            $manager->persist($ingredient);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $car = $form->getData();
+
+            // On récupère les images transmises
+            $images = $form->get('images')->getData();
+            // On boucle sur les images
+            foreach ($images as $image) {
+                // On génère un nouveaeu nom de fichier pour éviter que 2 images aient le même nom
+                $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+
+                // On copie le fichier dans le dossier uploads
+                $image->move(
+                    $this->getParameter('images_directory'),
+                    $fichier
+                );
+
+                // On stocke l'image (son nom) dans la bdd
+                $img = new Image();
+                $img->setName($fichier);
+                $car->addImage($img);
+            }
+
+            $manager->persist($car);
             $manager->flush();
 
             $this->addFlash(
@@ -106,6 +150,7 @@ class OccasionsController extends AbstractController
         }
 
         return $this->render('pages/car/edit.html.twig', [
+            'car' => $car,
             'form' => $form->createView()
         ]);
     }
@@ -113,6 +158,7 @@ class OccasionsController extends AbstractController
     /*
      * This controller allows to delete a car
      */
+    #[IsGranted('ROLE_USER')]
     #[Route('/car/delete/{id}', name: 'app_deleteOccasions', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Car $car): Response
     {
@@ -125,5 +171,31 @@ class OccasionsController extends AbstractController
         );
 
         return $this->redirectToRoute('app_occasions');
+    }
+
+    /*
+     * This controller allows to delete images of car
+     */
+    #[IsGranted('ROLE_USER')]
+    #[Route('/car/delete/image/{id}', name: 'app_deleteImageOccasions', methods: ['DELETE'])]
+    public function deleteImage(Image $image, Request $request, EntityManagerInterface $manager,)
+    {
+        $data = json_decode($request->getContent(), true);
+        // On vérifie si le token est valide
+        if ($this->isCsrfTokenValid('delete' . $image->getId(), $data['_token'])) {
+            // On récupère le nom de l'image
+            $nom = $image->getName();
+            // On supprime le fichier
+            unlink($this->getParameter('images_directory') . '/' . $nom);
+
+            // On supprime l'entrée de la base
+            $manager->remove($image);
+            $manager->flush();
+
+            // On répond en json
+            return new JsonResponse(['success' => 1]);
+        } else {
+            return new JsonResponse(['error' => 'Token invalide'], 400);
+        }
     }
 }

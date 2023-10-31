@@ -20,6 +20,7 @@ class Image
     #[ORM\JoinColumn(nullable: false)]
     private ?Car $car = null;
 
+
     public function getId(): ?int
     {
         return $this->id;

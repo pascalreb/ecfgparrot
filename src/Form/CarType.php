@@ -101,16 +101,16 @@ class CarType extends AbstractType
                     new Assert\Length(['min' => 4, 'max' => 6]),
                 ]
             ])
-            // ->add('images', FileType::class, [
-            //     'label' => false,
-            //     'multiple' => true,
-            //     'mapped' => false,
-            //     'required' => false,
-            //     'label_attr' => [
-            //         'class' => 'form-label mt-4',
-            //     ],
+            ->add('images', FileType::class, [
+                'label' => false,
+                'multiple' => true,
+                'mapped' => false,
+                'required' => false,
+                'label_attr' => [
+                    'class' => 'form-label mt-4',
+                ],
 
-            // ])
+            ])
             ->add('submit', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary mt-4 mb-4',
