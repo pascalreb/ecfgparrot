@@ -11,6 +11,6 @@ class LegalController extends AbstractController
     #[Route('/legal', name: 'app_legal')]
     public function index(): Response
     {
-        return $this->render('pages/legal_notice.html.twig');
+        return $this->render('pages/legal/legal_notice.html.twig');
     }
 }

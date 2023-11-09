@@ -55,7 +55,7 @@ class OpinionController extends AbstractController
     /*
      * This controller displays the opinion form for clients
      */
-    #[Route('/opinion/public', name: 'app_publicOpinion', methods: ['GET'])]
+    #[Route('/opinion/public', name: 'app_publicOpinion')]
     public function indexPublic(EntityManagerInterface $manager, Request $request): Response
     {
         $opinion = new Opinion();
@@ -73,7 +73,7 @@ class OpinionController extends AbstractController
                 'Votre avis a été envoyé avec succès !'
             );
 
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_publicOpinion');
         }
 
         return $this->render('pages/opinion/index_public.html.twig', [

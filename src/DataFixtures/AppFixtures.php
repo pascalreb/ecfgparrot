@@ -7,6 +7,7 @@ use App\Entity\Car;
 use App\Entity\Hour;
 use App\Entity\User;
 use Faker\Generator;
+use App\Entity\Contact;
 use App\Entity\Opinion;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -39,6 +40,16 @@ class AppFixtures extends Fixture
         }
 
         // Users
+        $users = [];
+
+        $admin = new User();
+        $admin->setEmail('admin@symrecipe.fr')
+            ->setRoles(['ROLE_USER', 'ROLE_ADMIN'])
+            ->setPlainPassword('admin');
+
+        $users[] = $admin;
+        $manager->persist($admin);
+
         for ($i = 1; $i <= 10; $i++) {
             $user = new User();
             $user->setEmail($this->faker->email())
@@ -59,7 +70,29 @@ class AppFixtures extends Fixture
             $manager->persist($opinion);
         }
 
+        // Contact
+        for ($i = 0; $i < 5; $i++) {
+            $contact = new Contact();
+            $contact->setName($this->faker->name())
+                ->setFirstname($this->faker->name())
+                ->setEmail($this->faker->email())
+                ->setPhone('0' . mt_rand(100000000, 599999999))
+                ->setMessage($this->faker->text());
 
+            $manager->persist($contact);
+        }
+
+        // Hours
+        // for ($i = 0; $i < 6; $i++) {
+        //     $hour = new Hour();
+        //     $hour->setDay($this->faker->dayOfWeek())
+        //         ->setOpeningTime1($this->faker->time())
+        //         ->setClosingTime1($this->faker->time())
+        //         ->setOpeningTime2($this->faker->time())
+        //         ->setClosingTime2($this->faker->time());
+
+        //     $manager->persist($hour);
+        // }
 
         $manager->flush();
     }

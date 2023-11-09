@@ -59,10 +59,10 @@ class RegistrationType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary mt-4 mb-4',
+                    'style' => 'width:100%',
                 ],
                 'label' => 'Créer mon profil',
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

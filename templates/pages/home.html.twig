@@ -6,12 +6,6 @@
 
     <h1 class="m-5 text-center">Garage Vincent PARROT</h1>
 
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success mt-4">
-            {{ message }}
-        </div>
-    {% endfor %}
-
     <section class="container-sm d-flex flex-column">
             <h2 class="m-4 text-center">Réparation carrosserie</h2>
             <div class="m-4 mx-auto">
@@ -53,11 +47,6 @@
                 {% endfor %}
             </div> #}
         
-    </section>
-
-    <section>
-        <img src={{ asset('uploads/douilles.jpg') }} class="container-fluid" alt="douilles cliquet" 
-        style="width: 100%; padding: 0;">
     </section>
 
 {% endblock %}

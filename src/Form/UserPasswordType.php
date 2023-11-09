@@ -49,12 +49,12 @@ class UserPasswordType extends AbstractType
                     new Assert\NotBlank(),
                 ]
             ])
-            ->add('submit', SubmitType::class , [
+            ->add('submit', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary mt-4 mb-4',
+                    'style' => 'width:100%',
                 ],
                 'label' => 'Modifier le mot de passe',
-            ])
-        ;
+            ]);
     }
 }
