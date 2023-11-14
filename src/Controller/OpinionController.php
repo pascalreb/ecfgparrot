@@ -82,7 +82,7 @@ class OpinionController extends AbstractController
     }
 
     /*
-     * This controller allows to add an opinion
+     * This controller allows to add an opinion for users
      */
     #[IsGranted('ROLE_USER')]
     #[Route('/opinion/new', name: 'app_newOpinion', methods: ['GET', 'POST'])]
@@ -108,6 +108,19 @@ class OpinionController extends AbstractController
 
         return $this->render('pages/opinion/new.html.twig', [
             'form' => $form->createView()
+        ]);
+    }
+
+    /*
+     * This controller displays approved opinions on the home page
+     */
+    #[Route('/', name: 'app_showOpinion', methods: ['GET'])]
+    public function show(OpinionRepository $repository, Opinion $opinion): Response
+    {
+        $opinions = $repository->findOpinion1(null);
+
+        return $this->render('pages/home.html.twig', [
+            'opinions' => $opinions,
         ]);
     }
 

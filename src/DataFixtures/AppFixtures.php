@@ -27,7 +27,7 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         // Cars
-        for ($i = 0; $i < 25; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $car = new Car();
             $car->setBrand($this->faker->word())
                 ->setModel($this->faker->word())
@@ -43,7 +43,7 @@ class AppFixtures extends Fixture
         $users = [];
 
         $admin = new User();
-        $admin->setEmail('admin@symrecipe.fr')
+        $admin->setEmail('admin@garageparrot.fr')
             ->setRoles(['ROLE_USER', 'ROLE_ADMIN'])
             ->setPlainPassword('admin');
 
@@ -73,7 +73,8 @@ class AppFixtures extends Fixture
         // Contact
         for ($i = 0; $i < 5; $i++) {
             $contact = new Contact();
-            $contact->setName($this->faker->name())
+            $contact->setSubject($this->faker->text(100))
+                ->setName($this->faker->name())
                 ->setFirstname($this->faker->name())
                 ->setEmail($this->faker->email())
                 ->setPhone('0' . mt_rand(100000000, 599999999))

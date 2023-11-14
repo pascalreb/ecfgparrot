@@ -65,4 +65,24 @@ class OpinionRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /*
+     * This method allows to display opinions with 'isApproved' = 1 on the home page
+     */
+    public function findOpinion1(?int $nbOpinions): array
+    {
+
+        $queryBuilder = $this->createQueryBuilder('opinion')
+            ->where('opinion.isApproved = 1')
+            ->orderBy('opinion.createdAt', 'desc');
+
+        if ($nbOpinions !== 0 || $nbOpinions !== null) {
+
+            $queryBuilder->setMaxResults($nbOpinions);
+        }
+
+        return $queryBuilder
+            ->getQuery()
+            ->getResult();
+    }
 }

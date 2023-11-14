@@ -59,7 +59,7 @@
             {% for image in car.images %}
                 <div>
                     <img src="{{ asset('./uploads/images/cars/' ~ image.name)}}" alt="images véhicule" width="300vw;">
-                    <a href="{{ path('app_deleteImageOccasions', {'id': image.id}) }}" data-delete 
+                    <a href="{{ path('app_deleteImageOccasions', {id: image.id}) }}" data-delete 
                     data-token="{{ csrf_token('delete' ~ image.id) }}">Supprimer</a>
                 </div>
             {% endfor %}

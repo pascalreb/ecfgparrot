@@ -2,15 +2,20 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\OpinionRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(): Response
+    public function index(OpinionRepository $repository): Response
     {
-        return $this->render('pages/home.html.twig');
+        $opinions = $repository->findOpinion1(null);
+
+        return $this->render('pages/home.html.twig', [
+            'opinions' => $opinions,
+        ]);
     }
 }

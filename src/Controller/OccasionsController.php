@@ -6,6 +6,7 @@ use App\Entity\Car;
 use App\Entity\Image;
 use App\Form\CarType;
 use App\Repository\CarRepository;
+use App\Repository\ImageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +23,7 @@ class OccasionsController extends AbstractController
     */
     #[IsGranted('ROLE_USER')]
     #[Route('/car', name: 'app_occasions')]
-    public function index(CarRepository $repository, PaginatorInterface $paginator, Request $request): Response
+    public function index(ImageRepository $image, CarRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
 
         $cars = $paginator->paginate(
@@ -40,16 +41,30 @@ class OccasionsController extends AbstractController
      * This controller displays all recipes which are public
      */
     #[Route('/car/public', name: 'app_publicOccasions', methods: ['GET'])]
-    public function indexPublic(CarRepository $repository, PaginatorInterface $paginator, Request $request): Response
+    public function indexPublic(ImageRepository $image, CarRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
+
         $cars = $paginator->paginate(
             $repository->findAll(), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
-            50 /*limit per page*/
+            10 /*limit per page*/
         );
 
         return $this->render('pages/car/index_public.html.twig', [
             'cars' => $cars,
+        ]);
+    }
+
+    /*
+     * This controller allows to display the details of a car
+     */
+    #[Route('/car/editionDetails/{id}', name: 'app_editDetailsOccasions', methods: ['GET'])]
+    public function editDetails(CarRepository $repository, int $id): Response
+    {
+        $car = $repository->findOneBy(["id" => $id]);
+
+        return $this->render('pages/car/editDetails.html.twig', [
+            'car' => $car,
         ]);
     }
 
@@ -109,7 +124,7 @@ class OccasionsController extends AbstractController
      */
     #[IsGranted('ROLE_USER')]
     #[Route('/car/edition/{id}', name: 'app_editOccasions', methods: ['GET', 'POST'])]
-    public function edit(CarRepository $repository, int $id, Request $request, EntityManagerInterface $manager): Response
+    public function edit(ImageRepository $image, CarRepository $repository, int $id, Request $request, EntityManagerInterface $manager): Response
     {
         $car = $repository->findOneBy(["id" => $id]);
         $form = $this->createForm(CarType::class, $car);
@@ -149,6 +164,7 @@ class OccasionsController extends AbstractController
         }
 
         return $this->render('pages/car/edit.html.twig', [
+            'image' => $image,
             'car' => $car,
             'form' => $form->createView()
         ]);

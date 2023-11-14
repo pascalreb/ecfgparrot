@@ -67,6 +67,15 @@ class Car
 
     private Collection $images;
 
+    #[
+        ORM\OneToMany(
+            mappedBy: 'car',
+            targetEntity: Contact::class,
+            orphanRemoval: true
+        )
+    ]
+    private Collection $contacts;
+
 
     /**
      * Constructor
@@ -76,6 +85,7 @@ class Car
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
         $this->images = new ArrayCollection();
+        $this->contacts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -199,10 +209,41 @@ class Car
 
     public function removeImage(Image $image): static
     {
-        if ($this->images->removeElement($image)) {
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
             // set the owning side to null (unless already changed)
             if ($image->getCar() === $this) {
                 $image->setCar(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Contact>
+     */
+    public function getContacts(): Collection
+    {
+        return $this->contacts;
+    }
+
+    public function addContact(Contact $contact): static
+    {
+        if (!$this->contacts->contains($contact)) {
+            $this->contacts->add($contact);
+            $contact->setCar($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContact(Contact $contact): static
+    {
+        if ($this->contacts->removeElement($contact)) {
+            // set the owning side to null (unless already changed)
+            if ($contact->getCar() === $this) {
+                $contact->setCar(null);
             }
         }
 
