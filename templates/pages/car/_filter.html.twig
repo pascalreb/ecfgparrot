@@ -1,0 +1,33 @@
+{{ form_start(form, {attr: {class: 'js-filter-form'}}) }}
+
+    <div class="d-flex flex-column">
+        
+        <div class="d-flex justify-content-center">
+            {{ form_row(form.q)}}
+        </div>
+        <div class="d-flex justify-content-center">
+            
+            {# <h4 class="text-center">Prix</h4> #}
+            <div class="d-flex flex-column m-4">
+                {{ form_row(form.prixmin) }}
+                {{ form_row(form.prixmax) }}
+            </div>
+            <div class="d-flex flex-column m-4">
+                {{ form_row(form.kilomin) }}
+                {{ form_row(form.kilomax) }}
+            </div>
+            <div class="d-flex flex-column m-4">
+                {{ form_row(form.yearmin) }}
+                {{ form_row(form.yearmax) }}
+            </div>
+
+        </div>
+        
+    </div>
+    <div class="d-flex justify-content-center">
+        
+        <button type="submit" class="btn btn-primary m-2 w-25">Filtrer</button>
+        <button type="submit" class="btn btn-secondary m-2 w-25">Réinitialiser</button>
+    </div>
+
+{{ form_end(form) }}

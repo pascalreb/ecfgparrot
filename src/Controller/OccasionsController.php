@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Data\SearchData;
 use App\Entity\Car;
 use App\Entity\Image;
 use App\Form\CarType;
+use App\Form\SearchType;
 use App\Repository\CarRepository;
 use App\Repository\ImageRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,7 +31,7 @@ class OccasionsController extends AbstractController
         $cars = $paginator->paginate(
             $repository->findAll(), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
-            10 /*limit per page*/
+            5 /*limit per page*/
         );
 
         return $this->render('pages/car/index.html.twig', [
@@ -38,20 +40,31 @@ class OccasionsController extends AbstractController
     }
 
     /*
-     * This controller displays all recipes which are public
+     * This controller displays all cars which are public
      */
     #[Route('/car/public', name: 'app_publicOccasions', methods: ['GET'])]
     public function indexPublic(ImageRepository $image, CarRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
+        $data = new SearchData();
+        $form = $this->createForm(SearchType::class, $data);
+        $form->handleRequest($request);
 
         $cars = $paginator->paginate(
-            $repository->findAll(), /* query NOT result */
+            $repository->findSearch($data), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
-            10 /*limit per page*/
+            15 /*limit per page*/
         );
+
+        if ($request->get('ajax')) {
+            return new JsonResponse([
+                'content' => $this->renderView('pages/car/_cars.html.twig', ['cars' => $cars]),
+                'sorting' => $this->renderView('pages/car/_sorting.html.twig', ['cars' => $cars]),
+            ]);
+        }
 
         return $this->render('pages/car/index_public.html.twig', [
             'cars' => $cars,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -69,7 +82,7 @@ class OccasionsController extends AbstractController
     }
 
     /*
-     * This controller allows to create an ingredient
+     * This controller allows to create a car
      */
     #[IsGranted('ROLE_USER')]
     #[Route('/car/new', name: 'app_newOccasions', methods: ['GET', 'POST'])]

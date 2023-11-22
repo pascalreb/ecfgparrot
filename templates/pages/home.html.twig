@@ -34,17 +34,18 @@
 
             <h2 class="m-4 text-center">Témoignages</h2>
 
-            <div id="carouselExample" class="carousel slide">
+        
+            {# <div id="carouselExample" class="carousel slide">
                 <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img src="{{ asset('uploads/atelier.jpg') }}" class="d-block w-100" alt="...">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="{{ asset('uploads/mecanique.jpg') }}" class="d-block w-100" alt="...">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="{{ asset('uploads/douilles.jpg') }}" class="d-block w-100" alt="...">
-                  </div>
+                    
+                    {% for opinion in opinions %}
+                    <div class="carousel-item active container">
+                        <p class="card-name"><b>{{ opinion.name }}</b></p>
+                        <p class="card-message">{{ opinion.message }}</p>
+                        <p class="card-mark fw-bold" style="color: red">{{ opinion.mark }}/5</p>
+                    </div>
+                    {% endfor %}
+                  
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -54,34 +55,11 @@
                   <span class="carousel-control-next-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Next</span>
                 </button>
-              </div>
-
-            {# <div id="carouselExample" class="carousel slide">
-                <div class="carousel-inner">
-                    
-                    {% for opinion in opinions %}
-                    <div class="carousel-item active">
-                    <p class="card-name"><b>{{ opinion.name }}</b></p>
-                    <p class="card-message">{{ opinion.message }}</p>
-                    <p class="card-mark fw-bold" style="color: red">{{ opinion.mark }}/5</p>
-                    </div>
-                    {% endfor %}
-                  
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-                
             </div> #}
-
-            {# <div class="d-flex">
+            
+            <div class="d-flex flex-column">
                 {% for opinion in opinions %}
-                    <div class="card" style="margin: 10px;">
+                    <div class="card mb-1">
                         <div class="card-body">
                             <h3 class="card-title"></h3>
                             <p class="card-name"><b>{{ opinion.name }}</b></p>
@@ -90,7 +68,7 @@
                         </div>
                     </div>
                 {% endfor %}
-            </div> #}
+            </div>
         
     </section>
 
