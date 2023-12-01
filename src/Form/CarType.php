@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Car;
+use App\Entity\Equipement;
 use App\Entity\Image;
+use App\Repository\EquipementRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -11,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -101,13 +104,30 @@ class CarType extends AbstractType
                     new Assert\Length(['min' => 4, 'max' => 6]),
                 ]
             ])
+            ->add('equipements', EntityType::class, [
+                'class' => Equipement::class,
+                'query_builder' => function (EquipementRepository $repository) {
+                    return $repository->createQueryBuilder('equipement')
+                        ->orderBy('equipement.name', 'ASC');
+                },
+                'label' => 'Les équipements',
+                'label_attr' => [
+                    'class' => 'form-label',
+                ],
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
+            ])
             ->add('images', FileType::class, [
+                'attr' => [
+                    'class' => 'form-control mt-4',
+                ],
                 'label' => false,
                 'multiple' => true,
                 'mapped' => false,
                 'required' => false,
                 'label_attr' => [
-                    'class' => 'form-label mt-4',
+                    'class' => 'form-label',
                 ],
 
             ])

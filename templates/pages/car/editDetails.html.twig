@@ -12,14 +12,18 @@
         {% endfor %}
 
         <div class="mb-4">Véhicule n° {{ car.id }}</div>
-        <img src="{{ asset('./uploads/images/cars/' ~ car.images[0].name )}}" alt="{{ car.brand ~ " " ~ car.model }}" width="50%">
+        <img src="{{ asset('./uploads/images/cars/' ~ car.images[0].name )}}" alt="{{ car.brand ~ " " ~ car.model }}" width="50%" style="border-radius: 5%;">
         
         <h4 class="mt-4 mb-4">Marque : {{ car.brand }}</h4>
         <p class="mb-4">Modèle : {{ car.model }}</p>
         <p class="mb-4">Année : {{ car.year }}</p>
         <p class="mb-4">Energie : {{ car.energy }}</p>
         <p class="mb-4">Kilométrage : {{ car.kilometers }} km</p>
-        <p class="mb-4 fs-4 fw-bold">Prix : {{ car.price }} €</p>
+        <p class="">Equipements :</p>
+        {% for equipement in car.equipements %}
+          <span class="badge bg-secondary">{{ equipement.name }}</span>
+        {% endfor %}
+        <p class="mt-4 mb-4 fs-4 fw-bold">Prix : {{ car.price }} €</p>
         <a href="{{ path('app_contactOccasions', { id: car.id }) }}"><button type="button" class="btn btn-primary mb-4" >Contacter le garage</button></a>
     </div>
 {% endblock %}

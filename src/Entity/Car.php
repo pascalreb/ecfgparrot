@@ -76,6 +76,9 @@ class Car
     ]
     private Collection $contacts;
 
+    #[ORM\ManyToMany(targetEntity: Equipement::class, inversedBy: 'cars')]
+    private Collection $equipements;
+
 
     /**
      * Constructor
@@ -86,6 +89,7 @@ class Car
         $this->updatedAt = new \DateTimeImmutable();
         $this->images = new ArrayCollection();
         $this->contacts = new ArrayCollection();
+        $this->equipements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -246,6 +250,30 @@ class Car
                 $contact->setCar(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Equipement>
+     */
+    public function getEquipements(): Collection
+    {
+        return $this->equipements;
+    }
+
+    public function addEquipement(Equipement $equipement): static
+    {
+        if (!$this->equipements->contains($equipement)) {
+            $this->equipements->add($equipement);
+        }
+
+        return $this;
+    }
+
+    public function removeEquipement(Equipement $equipement): static
+    {
+        $this->equipements->removeElement($equipement);
 
         return $this;
     }

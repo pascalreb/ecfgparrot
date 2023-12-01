@@ -57,6 +57,14 @@
             </div>
         </div>
 
+        {{ form_label(form.equipements) }}
+        {% for field in form.equipements %}
+            <div>
+                {{ form_widget(field) }}
+                {{ form_label(field) }}
+            </div>
+        {% endfor %}
+
         {{ form_row(form.images) }}
 
         <div class="form-group">
