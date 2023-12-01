@@ -9,6 +9,7 @@ use App\Form\CarType;
 use App\Form\SearchType;
 use App\Repository\CarRepository;
 use App\Repository\ImageRepository;
+use App\Service\ImageService;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -86,7 +87,7 @@ class OccasionsController extends AbstractController
      */
     #[IsGranted('ROLE_USER')]
     #[Route('/car/new', name: 'app_newOccasions', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $manager): Response
+    public function new(Request $request, EntityManagerInterface $manager, ImageService $imageService): Response
     {
         $car = new Car();
         $form = $this->createForm(CarType::class, $car);
@@ -100,7 +101,7 @@ class OccasionsController extends AbstractController
 
             // On boucle sur les images
             foreach ($images as $image) {
-                // On génère un nouveaeu nom de fichier pour éviter que 2 images aient le même nom
+                // On génère un nouveau nom de fichier pour éviter que 2 images aient le même nom
                 $fichier = md5(uniqid()) . '.' . $image->guessExtension();
 
                 // On copie le fichier dans le dossier uploads

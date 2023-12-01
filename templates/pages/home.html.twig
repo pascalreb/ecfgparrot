@@ -3,49 +3,61 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-
-    <h1 class="m-5 text-center">Garage Vincent PARROT</h1>
+    <div>
+        <div style="background-image: url('./uploads/atelier.jpg'); background-size: cover; height: 20vh;">
+    </div>
 
     <section class="container-sm d-flex flex-column">
-            <h2 class="m-4 text-center">Réparation carrosserie</h2>
-            <div class="m-4 mx-auto">
-                <i class="fa-solid fa-gear m-3"></i> Réparation plastique<br>
-                <i class="fa-solid fa-gear m-3"></i> Réparation optique<br>
-                <i class="fa-solid fa-gear m-3"></i> Vitrage<br>
-                <i class="fa-solid fa-gear m-3"></i> Réparation carrosserie rapide<br>
+            <h2 class="mt-4 pt-4 text-center"><span style="text-transform: uppercase;">Réparation</span> carrosserie</h2>
+            <div class="d-flex justify-content-evenly mb-4">
+                <div>
+                    <i class="fa-solid fa-gear m-3"></i> Réparation plastique<br>
+                    <i class="fa-solid fa-gear m-3"></i> Réparation optique<br>
+                </div>
+                <div>
+                    <i class="fa-solid fa-gear m-3"></i> Vitrage<br>
+                    <i class="fa-solid fa-gear m-3"></i> Réparation carrosserie rapide<br>
+                </div> 
             </div>
     </section>
-        
+    
+    <div class="divider">
+        <i class="fa-solid fa-circle"></i>
+    </div>
+
     <section class="container-sm d-flex flex-column">
-            <h2 class="m-4 text-center">Entretien du véhicule</h2>
-            <div class="m-4 mx-auto">
-                <i class="fa-solid fa-wrench m-3"></i> Révision vidange<br>
-                <i class="fa-solid fa-wrench m-3"></i> Climatisation<br>
-                <i class="fa-solid fa-wrench m-3"></i> Embrayage<br>
-                <i class="fa-solid fa-wrench m-3"></i> Courroie de distribution<br>
-                <i class="fa-solid fa-wrench m-3"></i> Amortisseurs<br>
-                <i class="fa-solid fa-wrench m-3"></i> Disques et plaquettes<br>
-                <i class="fa-solid fa-wrench m-3"></i> Diagnostic électronique<br>
-                <i class="fa-solid fa-wrench m-3"></i> Géométrie et parallélisme<br>
+            <h2 class="mt-4 text-center"><span style="text-transform: uppercase;">Entretien</span> du véhicule</h2>
+            <div class="d-flex justify-content-evenly mb-4">
+                <div>
+                    <i class="fa-solid fa-wrench m-3"></i> Révision vidange<br>
+                    <i class="fa-solid fa-wrench m-3"></i> Climatisation<br>
+                    <i class="fa-solid fa-wrench m-3"></i> Embrayage<br>
+                    <i class="fa-solid fa-wrench m-3"></i> Courroie de distribution<br>
+                </div>
+                <div>
+                    <i class="fa-solid fa-wrench m-3"></i> Amortisseurs<br>
+                    <i class="fa-solid fa-wrench m-3"></i> Disques et plaquettes<br>
+                    <i class="fa-solid fa-wrench m-3"></i> Diagnostic électronique<br>
+                    <i class="fa-solid fa-wrench m-3"></i> Géométrie et parallélisme<br>
+                </div>
             </div>
     </section>
 
-    <section class="container-sm">
+    <div class="divider">
+        <i class="fa-solid fa-circle"></i>
+    </div>
 
-            <h2 class="m-4 text-center">Témoignages</h2>
-
+    <section class="container-sm mb-4">
+            <h2 class="m-4 text-center" style="text-transform: uppercase;">Témoignages</h2>
         
-            {# <div id="carouselExample" class="carousel slide">
-                <div class="carousel-inner">
-                    
+                {# <div class="carousel-inner">
                     {% for opinion in opinions %}
-                    <div class="carousel-item active container">
-                        <p class="card-name"><b>{{ opinion.name }}</b></p>
-                        <p class="card-message">{{ opinion.message }}</p>
-                        <p class="card-mark fw-bold" style="color: red">{{ opinion.mark }}/5</p>
-                    </div>
+                        <div class="carousel-item {{ (loop.first) ? 'active' : '' }}">
+                            <p class="card-name"><b>{{ opinion.name }}</b></p>
+                            <p class="card-message">{{ opinion.message }}</p>
+                            <p class="card-mark fw-bold" style="color: red">{{ opinion.mark }}/5</p>
+                        </div>
                     {% endfor %}
-                  
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -54,12 +66,11 @@
                 <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
                   <span class="carousel-control-next-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Next</span>
-                </button>
-            </div> #}
+                </button> #}
             
-            <div class="d-flex flex-column">
+            <div class="d-flex flex-wrap justify-content-center">
                 {% for opinion in opinions %}
-                    <div class="card mb-1">
+                    <div class="card m-1" style="width: 15rem;">
                         <div class="card-body">
                             <h3 class="card-title"></h3>
                             <p class="card-name"><b>{{ opinion.name }}</b></p>
@@ -69,7 +80,10 @@
                     </div>
                 {% endfor %}
             </div>
-        
     </section>
+
+    <div>
+        <div style="background-image: url('./uploads/douilles2.jpg'); background-size: cover; height: 20vh;">
+    </div>
 
 {% endblock %}

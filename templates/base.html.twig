@@ -8,6 +8,7 @@
         
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.2/spacelab/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.2/spacelab/bootstrap.rtl.min.css">
 
@@ -15,7 +16,7 @@
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
@@ -30,13 +31,35 @@
                 grid-template-columns: repeat(3, 1fr);
                 grid-gap: 1rem;
             }
+            .divider {
+                display: flex;
+                align-items: center;
+                margin: 40px 0;
+                padding: 0 10%;
+                color: #BF4342;
+                font-size: 10px;
+              }
+              
+              .divider::before,
+              .divider::after {
+                content:'';
+                flex-grow: 1;
+                height: 3px;
+                background-color: #DBDBDB;
+              }
+              
+              .divider::before {
+                margin-right: 10px;
+              }
+              
+              .divider::after {
+                margin-left: 10px;
+              }
             
         </style>
         
         {{ encore_entry_link_tags('app') }}
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
@@ -46,6 +69,10 @@
             {% include "partials/_header.html.twig" %}
         {% endblock %}
         {% block body %}{% endblock %}
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
         {% block footer %}
             {% include "partials/_footer.html.twig" %}
         {% endblock %}
