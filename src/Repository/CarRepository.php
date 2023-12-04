@@ -23,7 +23,7 @@ class CarRepository extends ServiceEntityRepository
     }
 
     /**
-     * Shows cars linked to a search of price
+     * Shows cars linked to a search by price, year or kilometers
      * @return Car[]
      */
     public function findSearch(SearchData $search): array

@@ -28,7 +28,6 @@ class OccasionsController extends AbstractController
     #[IsGranted('ROLE_USER')]
     #[Route('/car', name: 'app_occasions')]
     public function index(
-        ImageRepository $image,
         CarRepository $repository,
         PaginatorInterface $paginator,
         Request $request,
@@ -52,7 +51,6 @@ class OccasionsController extends AbstractController
      */
     #[Route('/car/public', name: 'app_publicOccasions', methods: ['GET'])]
     public function indexPublic(
-        ImageRepository $image,
         CarRepository $repository,
         PaginatorInterface $paginator,
         Request $request,
