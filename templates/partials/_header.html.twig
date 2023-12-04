@@ -16,14 +16,19 @@
                             <a class="nav-link dropdown-toggle ps-4" data-bs-toggle="dropdown" href="#" role="button" 
                             aria-haspopup="true" aria-expanded="false">Occasions</a>
                             <div class="dropdown-menu" style="width: 12rem;">
-                              <a class="dropdown-item" href="{{ path('app_occasions') }}">Tableau utilisateur</a>
-                              <a class="dropdown-item" href="{{ path('app_publicOccasions') }}">Affichage client</a>
+                                <a class="dropdown-item" href="{{ path('app_occasions') }}">Tableau utilisateur</a>
+                                <a class="dropdown-item" href="{{ path('app_publicOccasions') }}">Affichage client</a>
                             </div>
                           </li>
 
                         <li class="nav-item">
                             <a class="nav-link pe-4" href="{{ path('app_opinion') }}">Avis</a>
                         </li>
+
+                        {% if 'ROLE_ADMIN' in app.user.roles %}
+                            <a class="nav-link pe-4" href="{{ path('app_hour') }}">Horaires</a>
+                        {% endif %}
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle ps-4" data-bs-toggle="dropdown" href="#" role="button" 
                             aria-haspopup="true" 

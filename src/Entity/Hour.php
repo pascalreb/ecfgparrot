@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\HourRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\HourRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: HourRepository::class)]
 class Hour
@@ -15,19 +16,32 @@ class Hour
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank()]
     private ?string $day = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[Assert\NotBlank()]
     private ?\DateTimeInterface $openingTime1 = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[Assert\NotBlank()]
     private ?\DateTimeInterface $closingTime1 = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[Assert\NotBlank()]
     private ?\DateTimeInterface $openingTime2 = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[Assert\NotBlank()]
     private ?\DateTimeInterface $closingTime2 = null;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->openingTime1 = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {

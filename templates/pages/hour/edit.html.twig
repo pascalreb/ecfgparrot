@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification des horaires d'ouverture{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        <h1 class="mt-4">Modification des horaires d'ouverture</h1>
+
+        {{ include('pages/hour/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+        <a href="{{ path('app_hour') }}">Retour</a>
+
+        {{ include('pages/hour/_delete_form.html.twig') }}
+
+    </div>
+
+{% endblock %}

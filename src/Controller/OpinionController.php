@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Opinion;
 use App\Form\OpinionType;
+use App\Repository\HourRepository;
 use App\Repository\OpinionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -20,8 +21,13 @@ class OpinionController extends AbstractController
     */
     #[IsGranted('ROLE_USER')]
     #[Route('/opinion', name: 'app_opinion', methods: ['GET', 'POST'])]
-    public function index(OpinionRepository $repository, Request $request, PaginatorInterface $paginator, EntityManagerInterface $manager): Response
-    {
+    public function index(
+        OpinionRepository $repository,
+        Request $request,
+        PaginatorInterface $paginator,
+        EntityManagerInterface $manager,
+        HourRepository $hourRepository
+    ): Response {
         $opinions = $paginator->paginate(
             $repository->findOpinion(null), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
@@ -48,7 +54,8 @@ class OpinionController extends AbstractController
 
         return $this->render('pages/opinion/index.html.twig', [
             'opinions' => $opinions,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'hours' => $hourRepository->findAll(),
         ]);
     }
 
@@ -56,8 +63,11 @@ class OpinionController extends AbstractController
      * This controller displays the opinion form for clients
      */
     #[Route('/opinion/public', name: 'app_publicOpinion')]
-    public function indexPublic(EntityManagerInterface $manager, Request $request): Response
-    {
+    public function indexPublic(
+        EntityManagerInterface $manager,
+        Request $request,
+        HourRepository $hourRepository
+    ): Response {
         $opinion = new Opinion();
         $form = $this->createForm(OpinionType::class, $opinion);
 
@@ -77,7 +87,8 @@ class OpinionController extends AbstractController
         }
 
         return $this->render('pages/opinion/index_public.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'hours' => $hourRepository->findAll(),
         ]);
     }
 
@@ -86,8 +97,11 @@ class OpinionController extends AbstractController
      */
     #[IsGranted('ROLE_USER')]
     #[Route('/opinion/new', name: 'app_newOpinion', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $manager): Response
-    {
+    public function new(
+        Request $request,
+        EntityManagerInterface $manager,
+        HourRepository $hourRepository
+    ): Response {
         $opinion = new Opinion();
         $form = $this->createForm(OpinionType::class, $opinion);
 
@@ -107,7 +121,8 @@ class OpinionController extends AbstractController
         }
 
         return $this->render('pages/opinion/new.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'hours' => $hourRepository->findAll(),
         ]);
     }
 

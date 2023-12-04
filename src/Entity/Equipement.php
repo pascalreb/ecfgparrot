@@ -69,10 +69,4 @@ class Equipement
 
         return $this;
     }
-
-    //Method which allows to define the name as string
-    public function __toString()
-    {
-        return $this->name;
-    }
 }

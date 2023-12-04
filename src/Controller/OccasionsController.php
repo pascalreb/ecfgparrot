@@ -2,14 +2,15 @@
 
 namespace App\Controller;
 
-use App\Data\SearchData;
 use App\Entity\Car;
 use App\Entity\Image;
 use App\Form\CarType;
+use App\Data\SearchData;
 use App\Form\SearchType;
-use App\Repository\CarRepository;
-use App\Repository\ImageRepository;
 use App\Service\ImageService;
+use App\Repository\CarRepository;
+use App\Repository\HourRepository;
+use App\Repository\ImageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,8 +27,13 @@ class OccasionsController extends AbstractController
     */
     #[IsGranted('ROLE_USER')]
     #[Route('/car', name: 'app_occasions')]
-    public function index(ImageRepository $image, CarRepository $repository, PaginatorInterface $paginator, Request $request): Response
-    {
+    public function index(
+        ImageRepository $image,
+        CarRepository $repository,
+        PaginatorInterface $paginator,
+        Request $request,
+        HourRepository $hourRepository
+    ): Response {
 
         $cars = $paginator->paginate(
             $repository->findAll(), /* query NOT result */
@@ -36,7 +42,8 @@ class OccasionsController extends AbstractController
         );
 
         return $this->render('pages/car/index.html.twig', [
-            'cars' => $cars
+            'cars' => $cars,
+            'hours' => $hourRepository->findAll(),
         ]);
     }
 
@@ -44,8 +51,13 @@ class OccasionsController extends AbstractController
      * This controller displays all cars which are public
      */
     #[Route('/car/public', name: 'app_publicOccasions', methods: ['GET'])]
-    public function indexPublic(ImageRepository $image, CarRepository $repository, PaginatorInterface $paginator, Request $request): Response
-    {
+    public function indexPublic(
+        ImageRepository $image,
+        CarRepository $repository,
+        PaginatorInterface $paginator,
+        Request $request,
+        HourRepository $hourRepository
+    ): Response {
         $data = new SearchData();
         $form = $this->createForm(SearchType::class, $data);
         $form->handleRequest($request);
@@ -66,6 +78,8 @@ class OccasionsController extends AbstractController
         return $this->render('pages/car/index_public.html.twig', [
             'cars' => $cars,
             'form' => $form->createView(),
+            'hours' => $hourRepository->findAll(),
+
         ]);
     }
 
@@ -73,12 +87,16 @@ class OccasionsController extends AbstractController
      * This controller allows to display the details of a car
      */
     #[Route('/car/editionDetails/{id}', name: 'app_editDetailsOccasions', methods: ['GET'])]
-    public function editDetails(CarRepository $repository, int $id): Response
-    {
+    public function editDetails(
+        CarRepository $repository,
+        int $id,
+        HourRepository $hourRepository
+    ): Response {
         $car = $repository->findOneBy(["id" => $id]);
 
         return $this->render('pages/car/editDetails.html.twig', [
             'car' => $car,
+            'hours' => $hourRepository->findAll(),
         ]);
     }
 
@@ -87,8 +105,12 @@ class OccasionsController extends AbstractController
      */
     #[IsGranted('ROLE_USER')]
     #[Route('/car/new', name: 'app_newOccasions', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $manager, ImageService $imageService): Response
-    {
+    public function new(
+        Request $request,
+        EntityManagerInterface $manager,
+        ImageService $imageService,
+        HourRepository $hourRepository
+    ): Response {
         $car = new Car();
         $form = $this->createForm(CarType::class, $car);
         $form->handleRequest($request);
@@ -130,6 +152,7 @@ class OccasionsController extends AbstractController
         return $this->render('pages/car/new.html.twig', [
             'car' => $car,
             'form' => $form->createView(),
+            'hours' => $hourRepository->findAll(),
         ]);
     }
 
@@ -138,8 +161,14 @@ class OccasionsController extends AbstractController
      */
     #[IsGranted('ROLE_USER')]
     #[Route('/car/edition/{id}', name: 'app_editOccasions', methods: ['GET', 'POST'])]
-    public function edit(ImageRepository $image, CarRepository $repository, int $id, Request $request, EntityManagerInterface $manager): Response
-    {
+    public function edit(
+        ImageRepository $image,
+        CarRepository $repository,
+        int $id,
+        Request $request,
+        EntityManagerInterface $manager,
+        HourRepository $hourRepository
+    ): Response {
         $car = $repository->findOneBy(["id" => $id]);
         $form = $this->createForm(CarType::class, $car);
         $form->handleRequest($request);
@@ -180,7 +209,8 @@ class OccasionsController extends AbstractController
         return $this->render('pages/car/edit.html.twig', [
             'image' => $image,
             'car' => $car,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'hours' => $hourRepository->findAll(),
         ]);
     }
 
@@ -189,8 +219,10 @@ class OccasionsController extends AbstractController
      */
     #[IsGranted('ROLE_USER')]
     #[Route('/car/delete/{id}', name: 'app_deleteOccasions', methods: ['GET'])]
-    public function delete(EntityManagerInterface $manager, Car $car): Response
-    {
+    public function delete(
+        EntityManagerInterface $manager,
+        Car $car
+    ): Response {
         $manager->remove($car);
         $manager->flush();
 
@@ -207,8 +239,11 @@ class OccasionsController extends AbstractController
      */
     #[IsGranted('ROLE_USER')]
     #[Route('/car/delete/image/{id}', name: 'app_deleteImageOccasions', methods: ['DELETE'])]
-    public function deleteImage(Image $image, Request $request, EntityManagerInterface $manager,)
-    {
+    public function deleteImage(
+        Image $image,
+        Request $request,
+        EntityManagerInterface $manager,
+    ) {
         $data = json_decode($request->getContent(), true);
         // On vérifie si le token est valide
         if ($this->isCsrfTokenValid('delete' . $image->getId(), $data['_token'])) {

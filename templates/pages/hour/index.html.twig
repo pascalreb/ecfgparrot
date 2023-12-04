@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Horaires d'ouverture{% endblock %}
+
+{% block body %}
+
+<div class="container mt-4">
+
+    <h1>Horaires d'ouverture</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Numéro</th>
+                <th>Jour</th>
+                <th>Ouverture matin</th>
+                <th>Fermeture matin</th>
+                <th>Ouverture après-midi</th>
+                <th>Fermeture après-midi</th>
+                <th>Edition</th>
+                <th>Suppression</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for hour in hours %}
+            <tr>
+                <td>{{ hour.id }}</td>
+                <td>{{ hour.day }}</td>
+                <td>{{ hour.openingTime1 ? hour.openingTime1|date('H:i:s') : '' }}</td>
+                <td>{{ hour.closingTime1 ? hour.closingTime1|date('H:i:s') : '' }}</td>
+                <td>{{ hour.openingTime2 ? hour.openingTime2|date('H:i:s') : '' }}</td>
+                <td>{{ hour.closingTime2 ? hour.closingTime2|date('H:i:s') : '' }}</td>
+                <td><a href="{{ path('app_hour_edit', {'id': hour.id}) }}" class="btn btn-info">Modifier</a></td>
+                <td><a href="{{ path('app_hour_delete', {'id': hour.id}) }}" class="btn btn-danger">Supprimer</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Aucun horaire trouvé.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+    {# <a href="{{ path('app_hour_new') }}">Create new</a> #}
+{% endblock %}

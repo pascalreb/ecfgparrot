@@ -6,6 +6,7 @@ use App\Entity\Car;
 use App\Entity\Contact;
 use App\Form\ContactType;
 use App\Repository\CarRepository;
+use App\Repository\HourRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,8 +16,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ContactController extends AbstractController
 {
     #[Route('/contact', name: 'app_contact')]
-    public function index(Request $request, EntityManagerInterface $manager): Response
-    {
+    public function index(
+        Request $request,
+        EntityManagerInterface $manager,
+        HourRepository $hourRepository
+    ): Response {
         $contact = new Contact();
 
         $form = $this->createForm(ContactType::class, $contact);
@@ -40,6 +44,7 @@ class ContactController extends AbstractController
 
         return $this->render('pages/contact/index.html.twig', [
             'form' => $form->createView(),
+            'hours' => $hourRepository->findAll(),
         ]);
     }
 
@@ -47,8 +52,14 @@ class ContactController extends AbstractController
      * This controller allows to display a contact form about a car
      */
     #[Route('/car/contact/{id}', name: 'app_contactOccasions', methods: ['GET', 'POST'])]
-    public function contactForCar(Car $car, CarRepository $repository, int $id, Request $request, EntityManagerInterface $manager): Response
-    {
+    public function contactForCar(
+        Car $car,
+        CarRepository $repository,
+        int $id,
+        Request $request,
+        EntityManagerInterface $manager,
+        HourRepository $hourRepository
+    ): Response {
 
         $contact = new Contact();
 
@@ -75,7 +86,7 @@ class ContactController extends AbstractController
             'id' => $id,
             'car' => $car,
             'form' => $form->createView(),
-
+            'hours' => $hourRepository->findAll(),
         ]);
     }
 }

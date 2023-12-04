@@ -3,14 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\UserPasswordType;
 use App\Form\UserType;
+use App\Form\UserPasswordType;
+use App\Repository\HourRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserController extends AbstractController
 {
@@ -18,10 +19,14 @@ class UserController extends AbstractController
     * This controller allows to edit user's profile
     */
     #[Route('/user/edition/{id}', name: 'app_editUser', methods: ['GET', 'POST'])]
-    public function edit(User $user, Request $request, EntityManagerInterface $manager,
-                         UserPasswordHasherInterface $hasher): Response
-    {
-        if(!$this->getUser()) {
+    public function edit(
+        User $user,
+        Request $request,
+        EntityManagerInterface $manager,
+        UserPasswordHasherInterface $hasher,
+        HourRepository $hourRepository
+    ): Response {
+        if (!$this->getUser()) {
             return $this->redirectToRoute('app_loginSecurity');
         }
 
@@ -34,8 +39,7 @@ class UserController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            if($hasher->isPasswordValid($user, $form->getData()->getPlainPassword()))
-            {
+            if ($hasher->isPasswordValid($user, $form->getData()->getPlainPassword())) {
                 $user = $form->getData();
 
                 $manager->persist($user);
@@ -47,7 +51,6 @@ class UserController extends AbstractController
                 );
 
                 return $this->redirectToRoute('app_home');
-
             } else {
                 $this->addFlash(
                     'warning',
@@ -58,6 +61,7 @@ class UserController extends AbstractController
 
         return $this->render('pages/user/edit.html.twig', [
             'form' => $form->createView(),
+            'hours' => $hourRepository->findAll(),
         ]);
     }
 
@@ -65,16 +69,19 @@ class UserController extends AbstractController
      * This controller allows to edit user's password
      */
     #[Route('/user/edition-mdp/{id}', name: 'app_editPasswordUser', methods: ['GET', 'POST'])]
-    public function editPassword(User $user, Request $request, UserPasswordHasherInterface $hasher,
-                                 EntityManagerInterface $manager): Response
-    {
+    public function editPassword(
+        User $user,
+        Request $request,
+        UserPasswordHasherInterface $hasher,
+        EntityManagerInterface $manager,
+        HourRepository $hourRepository
+    ): Response {
         $form = $this->createForm(UserPasswordType::class);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            if($hasher->isPasswordValid($user, $form->getData()['plainPassword']))
-            {
+            if ($hasher->isPasswordValid($user, $form->getData()['plainPassword'])) {
                 $user->setPassword(
                     $hasher->hashPassword(
                         $user,
@@ -91,7 +98,6 @@ class UserController extends AbstractController
                 $manager->flush();
 
                 return $this->redirectToRoute('app_home');
-
             } else {
                 $this->addFlash(
                     'warning',
@@ -102,6 +108,7 @@ class UserController extends AbstractController
 
         return $this->render('pages/user/edit_password.html.twig', [
             'form' => $form->createView(),
+            'hours' => $hourRepository->findAll(),
         ]);
     }
 }

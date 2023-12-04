@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
+use App\Repository\HourRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
@@ -17,11 +19,14 @@ class SecurityController extends AbstractController
      * This controller allows to login an user
      */
     #[Route('/connexion', name: 'app_loginSecurity', methods: ['GET', 'POST'])]
-    public function login(AuthenticationUtils $authenticationUtils): Response
-    {
+    public function login(
+        AuthenticationUtils $authenticationUtils,
+        HourRepository $hourRepository
+    ): Response {
         return $this->render('pages/security/login.html.twig', [
             'last_username' => $authenticationUtils->getLastUsername(),
             'error' => $authenticationUtils->getLastAuthenticationError(),
+            'hours' => $hourRepository->findAll(),
         ]);
     }
 
@@ -37,9 +42,13 @@ class SecurityController extends AbstractController
     /*
      * This controller allows to create an user
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/inscription', name: 'app_registrationSecurity', methods: ['GET', 'POST'])]
-    public function registration(Request $request, EntityManagerInterface $manager): Response
-    {
+    public function registration(
+        Request $request,
+        EntityManagerInterface $manager,
+        HourRepository $hourRepository
+    ): Response {
         $user = new User();
         $user->setRoles(['ROLE_USER']);
 
@@ -61,7 +70,8 @@ class SecurityController extends AbstractController
         }
 
         return $this->render('pages/security/registration.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'hours' => $hourRepository->findAll(),
         ]);
     }
 }
