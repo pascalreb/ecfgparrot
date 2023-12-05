@@ -61,7 +61,7 @@ class RegistrationType extends AbstractType
                     'class' => 'btn btn-primary mt-4 mb-4',
                     'style' => 'width:100%',
                 ],
-                'label' => 'Créer mon profil',
+                'label' => 'Créer le profil',
             ]);
     }
 
