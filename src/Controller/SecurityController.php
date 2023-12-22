@@ -42,7 +42,7 @@ class SecurityController extends AbstractController
     /*
      * This controller allows to create an user
      */
-    #[IsGranted('ROLE_ADMIN')]
+    //#[IsGranted('ROLE_ADMIN')]
     #[Route('/inscription', name: 'app_registrationSecurity', methods: ['GET', 'POST'])]
     public function registration(
         Request $request,
