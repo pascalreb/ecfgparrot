@@ -38,6 +38,8 @@
                                 {% if 'ROLE_ADMIN' in app.user.roles %}
                                     <a class="dropdown-item" href="{{ path('app_registrationSecurity') }}">Inscription</a>
                                     <a class="dropdown-item" href="{{ path('app_hour') }}">Horaires</a>
+                                    <a href="{{ path('app_newOccasions') }}" class="btn btn-primary">Ajouter un véhicule</a>
+
                                     <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="{{ path('admin') }}">Administration</a>
                                     <div class="dropdown-divider"></div>
@@ -61,9 +63,6 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link pe-3" href="{{ path('app_publicOpinion') }}">Avis</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link-pe-3" href="{{ path('app_registrationSecurity') }}">Inscription</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link ms-3" href="{{ path('app_loginSecurity') }}"><i class="fa-solid fa-user" 
