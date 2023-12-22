@@ -34,12 +34,12 @@
                                     Modifier mes informations</a>
                                 <a class="dropdown-item" href="{{ path('app_editPasswordUser', {id : app.user.id}) }}">
                                     Modifier mon mot de passe</a>
+                                    
+                                <a href="{{ path('app_newOccasions') }}" class="btn btn-primary">Ajouter un véhicule</a>
 
                                 {% if 'ROLE_ADMIN' in app.user.roles %}
                                     <a class="dropdown-item" href="{{ path('app_registrationSecurity') }}">Inscription</a>
                                     <a class="dropdown-item" href="{{ path('app_hour') }}">Horaires</a>
-                                    <a href="{{ path('app_newOccasions') }}" class="btn btn-primary">Ajouter un véhicule</a>
-
                                     <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="{{ path('admin') }}">Administration</a>
                                     <div class="dropdown-divider"></div>
