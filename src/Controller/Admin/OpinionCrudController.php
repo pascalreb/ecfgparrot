@@ -36,12 +36,12 @@ class OpinionCrudController extends AbstractCrudController
         return [
             IdField::new('id')
                 ->hideOnForm(),
-            TextField::new('name')
-                ->setFormTypeOption('disabled', 'disabled'),
-            TextareaField::new('message')
-                ->setFormTypeOption('disabled', 'disabled'),
-            IntegerField::new('mark')
-                ->setFormTypeOption('disabled', 'disabled'),
+            TextField::new('name'),
+            //->setFormTypeOption('disabled', 'disabled'),
+            TextareaField::new('message'),
+            //->setFormTypeOption('disabled', 'disabled'),
+            IntegerField::new('mark'),
+            //->setFormTypeOption('disabled', 'disabled'),
             BooleanField::new('isApproved'),
             DateTimeField::new('createdAt')
                 ->hideOnForm(),
