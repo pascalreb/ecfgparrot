@@ -49,7 +49,7 @@ class HourController extends AbstractController
         ]);
     }
 
-    #[IsGranted('ROLE_ADMIN')]
+    //#[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}', name: 'app_hour_show', methods: ['GET'])]
     public function show(
         Hour $hour,
@@ -61,7 +61,7 @@ class HourController extends AbstractController
         ]);
     }
 
-    #[IsGranted('ROLE_ADMIN')]
+    //#[IsGranted('ROLE_ADMIN')]
     #[Route('/edition/{id}', name: 'app_hour_edit', methods: ['GET', 'POST'])]
     public function edit(
         Request $request,
@@ -85,7 +85,7 @@ class HourController extends AbstractController
         ]);
     }
 
-    #[IsGranted('ROLE_ADMIN')]
+    //#[IsGranted('ROLE_ADMIN')]
     #[Route('/delete/{id}', name: 'app_hour_delete', methods: ['POST'])]
     public function delete(Request $request, Hour $hour, EntityManagerInterface $entityManager): Response
     {
