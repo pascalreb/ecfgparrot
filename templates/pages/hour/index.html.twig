@@ -8,6 +8,14 @@
 
     <h1>Horaires d'ouverture</h1>
 
+    <a href="{{ path('app_hour_new') }}" class="btn btn-primary">Ajouter un horaire</a>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success mt-4">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     <table class="table">
         <thead>
             <tr>

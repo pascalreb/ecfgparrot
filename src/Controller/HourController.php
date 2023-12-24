@@ -26,8 +26,11 @@ class HourController extends AbstractController
 
     //#[IsGranted('ROLE_ADMIN')]
     #[Route('/new', name: 'app_hour_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
+    public function new(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        HourRepository $hourRepository
+    ): Response {
         $hour = new Hour();
         $form = $this->createForm(HourType::class, $hour);
         $form->handleRequest($request);
@@ -42,15 +45,19 @@ class HourController extends AbstractController
         return $this->renderForm('pages/hour/new.html.twig', [
             'hour' => $hour,
             'form' => $form,
+            'hours' => $hourRepository->findAll(),
         ]);
     }
 
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}', name: 'app_hour_show', methods: ['GET'])]
-    public function show(Hour $hour): Response
-    {
+    public function show(
+        Hour $hour,
+        HourRepository $hourRepository
+    ): Response {
         return $this->render('pages/hour/show.html.twig', [
             'hour' => $hour,
+            'hours' => $hourRepository->findAll(),
         ]);
     }
 
