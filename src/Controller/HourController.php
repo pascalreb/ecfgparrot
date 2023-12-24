@@ -15,7 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 #[Route('/hour')]
 class HourController extends AbstractController
 {
-    #[IsGranted('ROLE_ADMIN')]
+    //#[IsGranted('ROLE_ADMIN')]
     #[Route('/', name: 'app_hour', methods: ['GET'])]
     public function index(HourRepository $hourRepository): Response
     {
@@ -24,7 +24,7 @@ class HourController extends AbstractController
         ]);
     }
 
-    #[IsGranted('ROLE_ADMIN')]
+    //#[IsGranted('ROLE_ADMIN')]
     #[Route('/new', name: 'app_hour_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
