@@ -87,7 +87,7 @@
         ],
         "compile": [
             "php bin/console doctrine:migrations:migrate",
-            "php bin/console doctrine:fixtures:load -n"
+            "php bin/console doctrine:fixtures:load --no-dev"
         ]
     },
     "conflict": {
