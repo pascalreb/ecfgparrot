@@ -39,7 +39,6 @@ class Contact
     #[ORM\Column]
     #[Assert\NotBlank()]
     #[Assert\Positive()]
-    #[Assert\Regex('/[0-9]+/')]
     private ?string $phone = null;
 
     #[ORM\Column(type: Types::TEXT)]
