@@ -5,13 +5,14 @@ namespace App\Form;
 use App\Entity\Contact;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ContactType extends AbstractType
@@ -29,6 +30,8 @@ class ContactType extends AbstractType
                 ],
                 'constraints' => [
                     new Assert\NotBlank(),
+                    new Regex('/[a-zA-Z]/'),
+
                 ]
             ])
             ->add('name', TextType::class, [
@@ -90,6 +93,7 @@ class ContactType extends AbstractType
                 'constraints' => [
                     new Assert\NotBlank(),
                     new Assert\Length(['min' => 10, 'max' => 10]),
+                    // new Regex('/^\(0\)[0-9]*$/', "Merci de ne saisir que des chiffres."),
                 ]
             ])
             ->add('message', TextareaType::class, [
