@@ -30,7 +30,6 @@ class Car
     #[ORM\Column(type: Types::SMALLINT)]
     #[Assert\NotBlank()]
     #[Assert\Positive()]
-    #[Assert\Length(min: 4, max: 4)]
     private ?int $year = null;
 
     #[ORM\Column(length: 50)]
@@ -40,13 +39,12 @@ class Car
     #[ORM\Column]
     #[Assert\NotBlank()]
     #[Assert\Positive()]
-    #[Assert\Length(min: 3, max: 6)]
+    // #[Assert\Length(min: 3, max: 6)]
     private ?int $kilometers = null;
 
     #[ORM\Column]
     #[Assert\NotBlank()]
     #[Assert\Positive()]
-    #[Assert\Length(min: 4, max: 6)]
     private ?int $price = null;
 
     #[ORM\Column]

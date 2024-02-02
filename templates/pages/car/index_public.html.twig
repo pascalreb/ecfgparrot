@@ -9,6 +9,12 @@
         
             <h1 class="mb-4">Les occasions du moment</h1>
 
+            {% for message in app.flashes('success') %}
+            <div class="alert alert-success mt-4">
+                {{ message }}
+            </div>
+            {% endfor %}
+
             <div class="container-sm js-filter">
 
                 <div>

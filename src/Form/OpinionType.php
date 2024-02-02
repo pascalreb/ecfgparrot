@@ -4,14 +4,15 @@ namespace App\Form;
 
 use App\Entity\Opinion;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
+
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-
-use Symfony\Component\Validator\Constraints as Assert;
 
 class OpinionType extends AbstractType
 {
@@ -31,6 +32,10 @@ class OpinionType extends AbstractType
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'max' => 50]),
                     new Assert\NotBlank(),
+                    new Regex([
+                        'pattern' => '/^[a-zA-Z]*$/',
+                        'message' => 'Le champ ne doit contenir que des lettres.',
+                    ]),
                 ]
             ])
             ->add('message', TextareaType::class, [
@@ -43,6 +48,10 @@ class OpinionType extends AbstractType
                 ],
                 'constraints' => [
                     new Assert\NotBlank(),
+                    new Regex([
+                        'pattern' => '/^[a-zA-Z0-9\s\-_.,!?]*$/',
+                        'message' => 'Le champ ne doit contenir que des lettres, chiffres, espaces et les caractères spéciaux - _ . , ! ?',
+                    ]),
                 ]
             ])
             ->add('mark',  RangeType::class, [

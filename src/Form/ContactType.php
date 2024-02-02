@@ -30,8 +30,11 @@ class ContactType extends AbstractType
                 ],
                 'constraints' => [
                     new Assert\NotBlank(),
-                    new Regex('/[a-zA-Z]/'),
-
+                    new Regex([
+                        'pattern' => '/^[a-zA-Z0-9\s\-_.,!?]*$/',
+                        'message' => 'Le champ ne doit contenir que des lettres, 
+                        chiffres, espaces et les caractères spéciaux - _ . , ! ?',
+                    ]),
                 ]
             ])
             ->add('name', TextType::class, [
@@ -47,6 +50,10 @@ class ContactType extends AbstractType
                 'constraints' => [
                     new Assert\NotBlank(),
                     new Assert\Length(['min' => 2, 'max' => 50]),
+                    new Regex([
+                        'pattern' => '/^[a-zA-Z]*$/',
+                        'message' => 'Le champ ne doit contenir que des lettres.',
+                    ]),
                 ]
             ])
             ->add('firstname', TextType::class, [
@@ -62,6 +69,10 @@ class ContactType extends AbstractType
                 'constraints' => [
                     new Assert\NotBlank(),
                     new Assert\Length(['min' => 2, 'max' => 50]),
+                    new Regex([
+                        'pattern' => '/^[a-zA-Z]*$/',
+                        'message' => 'Le champ ne doit contenir que des lettres.',
+                    ]),
                 ]
             ])
             ->add('email', EmailType::class, [
@@ -93,7 +104,10 @@ class ContactType extends AbstractType
                 'constraints' => [
                     new Assert\NotBlank(),
                     new Assert\Length(['min' => 10, 'max' => 10]),
-                    // new Regex('/^\(0\)[0-9]*$/', "Merci de ne saisir que des chiffres."),
+                    new Regex([
+                        'pattern' => '/^\d{10}$/',
+                        'message' => 'Le format n\'est pas valide, le numéro doit commencer par 0 suivi de 9 chiffres.',
+                    ]),                
                 ]
             ])
             ->add('message', TextareaType::class, [
@@ -106,6 +120,10 @@ class ContactType extends AbstractType
                 ],
                 'constraints' => [
                     new Assert\NotBlank(),
+                    new Regex([
+                        'pattern' => '/^[a-zA-Z0-9\s\-_.,!?]*$/',
+                        'message' => 'Le champ ne doit contenir que des lettres, chiffres, espaces et les caractères spéciaux - _ . , ! ?',
+                    ]),
                 ]
             ])
             ->add('submit', SubmitType::class, [
