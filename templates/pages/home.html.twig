@@ -50,27 +50,38 @@
     <section class="container-sm mb-4">
             <h2 class="m-4 text-center" style="text-transform: uppercase;">Témoignages</h2>
         
-                {# <div class="carousel-inner">
-                    {% for opinion in opinions %}
-                        <div class="carousel-item {{ (loop.first) ? 'active' : '' }}">
-                            <p class="card-name"><b>{{ opinion.name }}</b></p>
-                            <p class="card-message">{{ opinion.message }}</p>
-                            <p class="card-mark fw-bold" style="color: red">{{ opinion.mark }}/5</p>
+            {# <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  {% for opinion in opinions %}
+                    <div class="carousel-item {% if loop.first %}active{% endif %}">
+                      <div class="card mx-auto" style="max-width: 18rem;">
+                        <div class="card-body">
+                          <h3 class="card-title"></h3>
+                          <p class="card-name"><b>{{ opinion.name }}</b></p>
+                          <p class="card-message">{{ opinion.message }}</p>
+                          <p class="card-mark fw-bold" style="color: #446E9B">{{ opinion.mark }}/5</p>
                         </div>
-                    {% endfor %}
+                      </div>
+                    </div>
+                  {% endfor %}
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
                   <span class="carousel-control-next-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Next</span>
-                </button> #}
+                </button>
+            </div>
+              
+               #}
+              
+              
             
-            <div class="d-flex flex-wrap justify-content-center">
+            <div class="d-flex flex-wrap">
                 {% for opinion in opinions %}
-                    <div class="card m-1" style="width: 15rem;">
+                    <div class="card m-1" style="width: 100%;">
                         <div class="card-body">
                             <h3 class="card-title"></h3>
                             <p class="card-name"><b>{{ opinion.name }}</b></p>
@@ -84,6 +95,12 @@
 
     <div>
         <div style="background-image: url('./uploads/douilles2.jpg'); background-size: cover; height: 20vh;">
+    </div>
+
+    <div>
+        <a href="#" class="scroll-to-top" aria-label="Remonter en haut de la page">
+            <i class="fa-solid fa-circle-up"></i>
+          </a>
     </div>
 
 {% endblock %}
