@@ -12,8 +12,18 @@
         {% endfor %}
 
         <div class="mb-4">Véhicule n° {{ car.id }}</div>
-        <img src="{{ asset('./uploads/images/cars/' ~ car.images[0].name )}}" alt="{{ car.brand ~ " " ~ car.model }}" width="50%" style="border-radius: 5%;">
         
+        {% if car.images|length > 0 %}
+            <img id="mainImage" src="{{ asset('./uploads/images/cars/' ~ car.images[0].name )}}" alt="{{ car.brand ~ " " ~ car.model }}" width="50%" style="border-radius: 15px;">
+            {% if car.images|length > 1 %}
+                <div id="smallImages" style="display: flex; margin-top: 10px;">
+                {% for i in 1..(car.images|length - 1) %}
+                    <img class="smallImage clickable" src="{{ asset('./uploads/images/cars/' ~ car.images[i].name )}}" alt="{{ car.brand ~ " " ~ car.model }}" width="10%" style="border-radius: 15px; padding-right: 5px;">
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endif %}
+
         <h4 class="mt-4 mb-4">Marque : {{ car.brand }}</h4>
         <p class="mb-4">Modèle : {{ car.model }}</p>
         <p class="mb-4">Année : {{ car.year }}</p>
@@ -21,9 +31,26 @@
         <p class="mb-4">Kilométrage : {{ car.kilometers }} km</p>
         <p class="">Equipements :</p>
         {% for equipement in car.equipements %}
-          <span class="badge bg-secondary">{{ equipement.name }}</span>
+            <span class="badge bg-secondary">{{ equipement.name }}</span>
         {% endfor %}
         <p class="mt-4 mb-4 fs-4 fw-bold">Prix : {{ car.price }} €</p>
         <a href="{{ path('app_contactOccasions', { id: car.id }) }}"><button type="button" class="btn btn-primary mb-4" >Contacter le garage</button></a>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var mainImage = document.getElementById("mainImage");
+        var smallImages = document.querySelectorAll(".smallImage");
+    
+        smallImages.forEach(function(smallImage) {
+            smallImage.addEventListener("click", function() {
+                var tempSrc = mainImage.src;
+                mainImage.src = this.src;
+                this.src = tempSrc;
+            });
+        });
+    });
+</script>
 {% endblock %}

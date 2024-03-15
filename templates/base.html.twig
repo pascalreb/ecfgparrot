@@ -45,18 +45,18 @@
             
             .divider::before,
             .divider::after {
-              content:'';
-              flex-grow: 1;
-              height: 3px;
-              background-color: #DBDBDB;
+                content:'';
+                flex-grow: 1;
+                height: 3px;
+                background-color: #DBDBDB;
             }
             
             .divider::before {
-              margin-right: 10px;
+                margin-right: 10px;
             }
             
             .divider::after {
-              margin-left: 10px;
+                margin-left: 10px;
             }
 
             .scroll-to-top {
@@ -70,9 +70,12 @@
               }
 
             .scroll-to-top:hover {
-              transform: translateY(-5px);
+                transform: translateY(-5px);
             }
 
+            .clickable {
+                cursor: pointer;
+            }
         </style>
       
         {{ encore_entry_link_tags('app') }}
