@@ -104,3 +104,20 @@
     </div>
 
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var scrollButton = document.querySelector('.scroll-to-top');
+            scrollButton.style.display = "none";
+            window.addEventListener('scroll', function() {
+                if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+                    scrollButton.style.display = "block";
+                } else {
+                    scrollButton.style.display = "none";
+                }
+            });
+        });
+    </script>
+{% endblock %}

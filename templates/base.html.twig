@@ -74,23 +74,7 @@
             }
 
         </style>
-        
-        <script>
-            // Afficher l'icône de remontée lorsque la page est défilée vers le bas
-            window.onscroll = function() {
-              scrollFunction();
-            };
-          
-            function scrollFunction() {
-              var scrollButton = document.querySelector('.scroll-to-top');
-              if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
-                scrollButton.style.display = "block";
-              } else {
-                scrollButton.style.display = "none";
-              }
-            }
-          </script>
-
+      
         {{ encore_entry_link_tags('app') }}
 
         {% block javascripts %}
@@ -108,8 +92,7 @@
         
         {% block body %}{% endblock %}
 
-        
-
+      
         {% block footer %}
             {% include "partials/_footer.html.twig" %}
         {% endblock %}
