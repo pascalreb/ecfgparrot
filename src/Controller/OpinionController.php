@@ -129,15 +129,15 @@ class OpinionController extends AbstractController
     /*
      * This controller displays approved opinions on the home page
      */
-    #[Route('/', name: 'app_showOpinion', methods: ['GET'])]
-    public function show(OpinionRepository $repository, Opinion $opinion): Response
-    {
-        $opinions = $repository->findOpinion1(null);
+    // #[Route('/', name: 'app_showOpinion', methods: ['GET'])]
+    // public function show(OpinionRepository $repository): Response
+    // {
+    //     $opinions = $repository->findOpinion1(null);
 
-        return $this->render('pages/home.html.twig', [
-            'opinions' => $opinions,
-        ]);
-    }
+    //     return $this->render('pages/home.html.twig', [
+    //         'opinions' => $opinions,
+    //     ]);
+    // }
 
     /*
      * This controller allows to validate an opinion

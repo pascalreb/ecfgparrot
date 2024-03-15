@@ -60,7 +60,7 @@ class OpinionType extends AbstractType
                     'min' => 1,
                     'max' => 5,
                 ],
-                'label' => 'Note',
+                'label' => 'Note de 1 (extrême gauche) à 5 (extrême droite)',
                 'label_attr' => [
                     'class' => 'form-check-label mt-4',
                 ],

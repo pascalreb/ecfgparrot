@@ -69,7 +69,7 @@ class OpinionRepository extends ServiceEntityRepository
     /*
      * This method allows to display opinions with 'isApproved' = 1 on the home page
      */
-    public function findOpinion1(?int $nbOpinions): array
+    public function findApprovedOpinions(?int $nbOpinions): array
     {
 
         $queryBuilder = $this->createQueryBuilder('opinion')
