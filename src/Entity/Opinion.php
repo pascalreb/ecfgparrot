@@ -26,9 +26,7 @@ class Opinion
     private ?string $message = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
-    #[Assert\Positive()]
-    #[Assert\LessThan(6)]
-    private ?int $mark = null;
+    private ?int $mark;
 
     #[ORM\Column(nullable: true)]
     private ?bool $isApproved = false;

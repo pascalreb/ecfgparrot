@@ -77,12 +77,12 @@ class OpinionController extends AbstractController
 
             $manager->persist($opinion);
             $manager->flush();
-
+    
             $this->addFlash(
                 'success',
                 'Votre avis a été envoyé avec succès !'
             );
-
+    
             return $this->redirectToRoute('app_publicOpinion');
         }
 
@@ -125,19 +125,6 @@ class OpinionController extends AbstractController
             'hours' => $hourRepository->findAll(),
         ]);
     }
-
-    /*
-     * This controller displays approved opinions on the home page
-     */
-    // #[Route('/', name: 'app_showOpinion', methods: ['GET'])]
-    // public function show(OpinionRepository $repository): Response
-    // {
-    //     $opinions = $repository->findOpinion1(null);
-
-    //     return $this->render('pages/home.html.twig', [
-    //         'opinions' => $opinions,
-    //     ]);
-    // }
 
     /*
      * This controller allows to validate an opinion

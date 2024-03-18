@@ -11,7 +11,7 @@
             </div>
         {% endfor %}
 
-        <div class="mb-4">Véhicule n° {{ car.id }}</div>
+        <div class="mb-2">Véhicule n° {{ car.id }}</div>
         
         {% if car.images|length > 0 %}
             <img id="mainImage" src="{{ asset('./uploads/images/cars/' ~ car.images[0].name )}}" alt="{{ car.brand ~ " " ~ car.model }}" width="50%" style="border-radius: 15px;">
@@ -36,21 +36,4 @@
         <p class="mt-4 mb-4 fs-4 fw-bold">Prix : {{ car.price }} €</p>
         <a href="{{ path('app_contactOccasions', { id: car.id }) }}"><button type="button" class="btn btn-primary mb-4" >Contacter le garage</button></a>
     </div>
-{% endblock %}
-
-{% block javascripts %}
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var mainImage = document.getElementById("mainImage");
-        var smallImages = document.querySelectorAll(".smallImage");
-    
-        smallImages.forEach(function(smallImage) {
-            smallImage.addEventListener("click", function() {
-                var tempSrc = mainImage.src;
-                mainImage.src = this.src;
-                this.src = tempSrc;
-            });
-        });
-    });
-</script>
 {% endblock %}

@@ -9,8 +9,7 @@ use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\RangeType;
-
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
@@ -54,21 +53,7 @@ class OpinionType extends AbstractType
                     ]),
                 ]
             ])
-            ->add('mark',  RangeType::class, [
-                'attr' => [
-                    'class' => 'form-range',
-                    'min' => 1,
-                    'max' => 5,
-                ],
-                'label' => 'Note de 1 (extrême gauche) à 5 (extrême droite)',
-                'label_attr' => [
-                    'class' => 'form-check-label mt-4',
-                ],
-                'constraints' => [
-                    new Assert\Positive(),
-                    new Assert\LessThan(6),
-                ]
-            ])
+            ->add('mark', HiddenType::class)
             ->add('submit', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary mt-4 mb-4',
