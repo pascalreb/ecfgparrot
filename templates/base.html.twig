@@ -101,6 +101,19 @@
             {{ encore_entry_script_tags('app') }}
 
             <script>
+                // Gestion du scroll
+                document.addEventListener("DOMContentLoaded", function() {
+                    var scrollButton = document.querySelector('.scroll-to-top');
+                    scrollButton.style.display = "none";
+                    window.addEventListener('scroll', function() {
+                        if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+                            scrollButton.style.display = "block";
+                        } else {
+                            scrollButton.style.display = "none";
+                        }
+                    });
+                });
+
                 // Gestion des photos véhicules
                 document.addEventListener("DOMContentLoaded", function() {
                     var mainImage = document.getElementById("mainImage");

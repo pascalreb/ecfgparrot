@@ -75,8 +75,6 @@
                 </button>
             </div> #}
               
-
-
             <div class="d-flex flex-wrap">
                 {% for opinion in opinions %}
                     <div class="card m-1" style="width: 100%;">
@@ -84,7 +82,18 @@
                             <h3 class="card-title"></h3>
                             <p class="card-name"><b>{{ opinion.name }}</b></p>
                             <p class="card-message">{{ opinion.message }}</p>
-                            <p class="card-mark fw-bold" style="color: #446E9B">{{ opinion.mark }}/5</p>
+                            <p class="card-mark fw-bold" style="color: #446E9B">
+                                {% for i in 1..5 %}
+                                    {% if i <= opinion.mark %}
+                                        <i class="fa-solid fa-star"></i>
+                                    {% else %}
+                                        <i class="fa-regular fa-star"></i>
+                                    {% endif %}
+                                {% endfor %}
+                                <span class="p-3">
+                                    {{ opinion.mark }}/5
+                                </span>
+                            </p>
                         </div>
                     </div>
                 {% endfor %}
@@ -104,24 +113,4 @@
           </a>
     </div>
 
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Code pour le bouton de scroll
-            var scrollButton = document.querySelector('.scroll-to-top');
-            scrollButton.style.display = "none";
-            window.addEventListener('scroll', function() {
-                if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-                    scrollButton.style.display = "block";
-                } else {
-                    scrollButton.style.display = "none";
-                }
-            });
-        });
-        
-
-    </script>
 {% endblock %}
