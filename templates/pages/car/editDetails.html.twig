@@ -14,11 +14,11 @@
         <div class="mb-2">Véhicule n° {{ car.id }}</div>
         
         {% if car.images|length > 0 %}
-            <img id="mainImage" src="{{ asset('./uploads/images/cars/' ~ car.images[0].name )}}" alt="{{ car.brand ~ " " ~ car.model }}" width="50%" style="border-radius: 15px;">
+            <img id="mainImage" src="{{ asset('./uploads/images/cars/' ~ car.images[0].name )}}" alt="{{ car.brand ~ " " ~ car.model }}" width="700px" style="border-radius: 15px;">
             {% if car.images|length > 1 %}
                 <div id="smallImages" style="display: flex; margin-top: 10px;">
                 {% for i in 1..(car.images|length - 1) %}
-                    <img class="smallImage clickable" src="{{ asset('./uploads/images/cars/' ~ car.images[i].name )}}" alt="{{ car.brand ~ " " ~ car.model }}" width="10%" style="border-radius: 15px; padding-right: 5px;">
+                    <img class="smallImage clickable" src="{{ asset('./uploads/images/cars/' ~ car.images[i].name )}}" alt="{{ car.brand ~ " " ~ car.model }}" width="150px" style="border-radius: 15px; padding-right: 5px;">
                 {% endfor %}
                 </div>
             {% endif %}

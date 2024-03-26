@@ -1,3 +1,4 @@
+CREATE DATABASE sf_gparrot;
 
 DROP TABLE IF EXISTS car;
 CREATE TABLE car (
@@ -28,8 +29,8 @@ CREATE TABLE car_equipement (
   car_id int NOT NULL,
   equipement_id int NOT NULL,
   PRIMARY KEY (car_id,equipement_id),
-  Foreign Key (car_id) REFERENCES car(car_id),
-  Foreign Key (equipement_id) REFERENCES equipement_id(equipement_id)
+  Foreign Key (car_id) REFERENCES car(id),
+  Foreign Key (equipement_id) REFERENCES equipement(id)
 );
 
 DROP TABLE IF EXISTS contact;
@@ -43,7 +44,7 @@ CREATE TABLE contact (
   message longtext NOT NULL,
   created_at datetime NOT NULL,
   car_id int DEFAULT NULL,
-  Foreign Key (car_id) REFERENCES car(car_id)
+  Foreign Key (car_id) REFERENCES car(id)
 );
 
 INSERT INTO contact (subject, name, firstname, email, phone, message) VALUES
@@ -94,7 +95,7 @@ CREATE TABLE image (
   id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name varchar(255) NOT NULL,
   car_id int DEFAULT NULL,
-  Foreign Key (car_id) REFERENCES car(car_id)
+  Foreign Key (car_id) REFERENCES car(id)
 );
 
 INSERT INTO image (name) VALUES
@@ -165,3 +166,8 @@ INSERT INTO user (email, roles) VALUES
 ('aurore.marchand@laposte.net', '["ROLE_USER"]'),
 ('charpentier.isaac@thibault.fr', '["ROLE_USER"]'),
 ('peltier.maryse@henry.com', '["ROLE_USER"]');
+
+/* Exemple de jointure */
+SELECT contact.*, car.price as car_price FROM contact
+JOIN car ON car.id = contact.car_id
+ORDER BY car_price ASC;
