@@ -8,17 +8,41 @@
     </div>
 
     <section class="container-sm d-flex flex-column">
-            <h2 class="mt-4 pt-4 text-center" style="text-transform: uppercase; color: #446E9B;">Réparation carrosserie</h2>
-            <div class="d-flex justify-content-evenly mb-4">
-                <div>
-                    <i class="fa-solid fa-gear m-3"></i> Réparation plastique<br>
-                    <i class="fa-solid fa-gear m-3"></i> Réparation optique<br>
+        <h2 class="mt-4 pt-4 text-center" style="text-transform: uppercase; color: #446E9B;">
+            <i class="fa-solid fa-gear m-3"></i>Réparation carrosserie</h2>
+        <div class="carrosserie row">
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Réparation plastique</h5>
+                    </div>
                 </div>
-                <div>
-                    <i class="fa-solid fa-gear m-3"></i> Vitrage<br>
-                    <i class="fa-solid fa-gear m-3"></i> Réparation carrosserie rapide<br>
-                </div> 
             </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Réparation optique</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Vitrage</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Réparation carrosserie rapide</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-end mt-4">
+            <a href=""><button type="button" class="btn btn-primary">En savoir plus</button></a>
+        </div>
     </section>
     
     <div class="divider">
@@ -26,61 +50,109 @@
     </div>
 
     <section class="container-sm d-flex flex-column">
-            <h2 class="mt-4 text-center" style="text-transform: uppercase; color: #446E9B;">Entretien du véhicule</h2>
-            <div class="d-flex justify-content-evenly mb-4">
-                <div>
-                    <i class="fa-solid fa-wrench m-3"></i> Révision vidange<br>
-                    <i class="fa-solid fa-wrench m-3"></i> Climatisation<br>
-                    <i class="fa-solid fa-wrench m-3"></i> Embrayage<br>
-                    <i class="fa-solid fa-wrench m-3"></i> Courroie de distribution<br>
-                </div>
-                <div>
-                    <i class="fa-solid fa-wrench m-3"></i> Amortisseurs<br>
-                    <i class="fa-solid fa-wrench m-3"></i> Disques et plaquettes<br>
-                    <i class="fa-solid fa-wrench m-3"></i> Diagnostic électronique<br>
-                    <i class="fa-solid fa-wrench m-3"></i> Géométrie et parallélisme<br>
+        <h2 class="text-center" style="text-transform: uppercase; color: #446E9B;">
+            <i class="fa-solid fa-wrench m-3"></i> Entretien du véhicule</h2>
+        <div class="entretien row d-flex flex-wrap justify-content-between">
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Révision vidange</h5>
+                    </div>
                 </div>
             </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Climatisation</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Embrayage</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Courroie de distribution</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Amortisseurs</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Disques et plaquettes</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Diagnostic électronique</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title ex">Géométrie et parallélisme</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-end mt-2">
+            <a href=""><button type="button" class="btn btn-primary">En savoir plus</button></a>
+        </div>
     </section>
 
     <div class="divider">
         <i class="fa-solid fa-circle"></i>
     </div>
 
-    <section class="container-sm mb-4">
-            <h2 class="m-4 text-center" style="text-transform: uppercase; color: #446E9B;">Témoignages</h2>
-            <div class="d-flex flex-wrap">
-                {% for opinion in opinions %}
-                    <div class="card m-1" style="width: 100%;">
-                        <div class="card-body">
-                            <h3 class="card-title"></h3>
-                            <p class="card-name"><b>{{ opinion.name }}</b></p>
-                            <p class="card-message">{{ opinion.message }}</p>
-                            <p class="card-mark" style="color: #446E9B">
-                                {% for i in 1..5 %}
-                                    {% if i <= opinion.mark %}
-                                        <i class="fa-solid fa-star"></i>
-                                    {% else %}
-                                        <i class="fa-regular fa-star"></i>
-                                    {% endif %}
-                                {% endfor %}
-                                <span class="fw-bold p-3">
-                                    {{ opinion.mark }}/5
-                                </span>
-                                <span class="p-3">
-                                    - {{ opinion.createdAt|date("m/d/Y") }}
-                                </span>
-                            </p>
-                        </div>
+    <section class="temoignages container-sm p-4">
+        <h2 class="text-center" style="text-transform: uppercase; color: #446E9B;">Témoignages</h2>
+        <div class="d-flex flex-wrap">
+            {% for opinion in opinions %}
+                <div class="card m-1" style="width: 100%;">
+                    <div class="card-body">
+                        <h3 class="card-title"></h3>
+                        <p class="card-name"><b>{{ opinion.name }}</b></p>
+                        <p class="card-message">{{ opinion.message }}</p>
+                        <p class="card-mark" style="color: #446E9B">
+                            {% for i in 1..5 %}
+                                {% if i <= opinion.mark %}
+                                    <i class="fa-solid fa-star"></i>
+                                {% else %}
+                                    <i class="fa-regular fa-star"></i>
+                                {% endif %}
+                            {% endfor %}
+                            <span class="fw-bold ps-3">
+                                {{ opinion.mark }}/5
+                            </span>
+                            <span>
+                                - {{ opinion.createdAt|date("m/d/Y") }}
+                            </span>
+                        </p>
                     </div>
-                {% endfor %}
-            </div>
-            <div class="navigation d-flex justify-content-center mt-4">
-                {{ knp_pagination_render(opinions) }}
-            </div>
-            <div class="d-flex justify-content-end">
-                <a href="{{ path('app_publicOpinion') }}"><button type="button" class="btn btn-primary">Donnez votre avis</button></a>
-            </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="navigation d-flex justify-content-center mt-4">
+            {{ knp_pagination_render(opinions) }}
+        </div>
+        <div class="d-flex justify-content-end">
+            <a href="{{ path('app_publicOpinion') }}"><button type="button" class="btn btn-primary">Donnez votre avis</button></a>
+        </div>
     </section>
 
     <div class="divider">
@@ -96,7 +168,7 @@
     </section>
     <div>
         <a href="#" class="scroll-to-top" aria-label="Remonter en haut de la page">
-            <i class="fa-solid fa-circle-up"></i>
+            <i class="fa-solid fa-chevron-up"></i>
         </a>
     </div>
 

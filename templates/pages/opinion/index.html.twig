@@ -8,7 +8,7 @@
         {% if not opinions.items is same as([]) %}
             <h1>Nos avis</h1>
 
-            <a href="{{ path('app_newOpinion') }}" class="btn btn-primary">Ajouter un avis</a>
+            <a href="{{ path('app_newOpinion') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Ajouter</a>
 
             {% for message in app.flashes('success') %}
                 <div class="alert alert-success mt-4">
@@ -21,7 +21,7 @@
             </div>
             <table class="table">
                 <thead>
-                <tr>
+                <tr class="text-center">
                     <th scope="col">Numéro</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Message</th>
@@ -33,14 +33,14 @@
                 </thead>
                 <tbody>
                 {% for opinion in opinions %}
-                    <tr>
+                    <tr class="text-center">
                         <th scope="row">{{ opinion.id }}</th>
                         <td>{{ opinion.name }}</td>
                         <td>{{ opinion.message }}</td>
                         <td>{{ opinion.mark }}</td>
                         <td>{{ opinion.createdAt|date('d/m/y') }}</td>
-                        <td><a href="{{ path('app_editOpinion', { id: opinion.id }) }}" class="btn btn-info">Valider</a></td>
-                        <td><a href="{{ path('app_deleteOpinion', { id: opinion.id }) }}" class="btn btn-danger">Supprimer</a></td>
+                        <td><a href="{{ path('app_editOpinion', { id: opinion.id }) }}" class="btn btn-success"><i class="fa-solid fa-check"></i></a></td>
+                        <td><a href="{{ path('app_deleteOpinion', { id: opinion.id }) }}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a></td>
                     </tr>
                 {% endfor %}
                 </tbody>

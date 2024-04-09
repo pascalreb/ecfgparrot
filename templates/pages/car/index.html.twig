@@ -7,7 +7,7 @@
         {% if not cars.items is same as([]) %}
             <h1>Nos véhicules</h1>
 
-            <a href="{{ path('app_newOccasions') }}" class="btn btn-primary">Ajouter un véhicule</a>
+            <a href="{{ path('app_newOccasions') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Ajouter</a>
 
             {% for message in app.flashes('success') %}
                 <div class="alert alert-success mt-4">
@@ -20,7 +20,7 @@
             </div>
             <table class="table">
                 <thead>
-                <tr>
+                <tr class="text-center">
                     <th scope="col">Numéro</th>
                     <th scope="col">Marque</th>
                     <th scope="col">Modèle</th>
@@ -35,7 +35,7 @@
                 </thead>
                 <tbody>
                 {% for car in cars %}
-                    <tr>
+                    <tr class="text-center">
                         <th scope="row">{{ car.id }}</th>
                         <td>{{ car.brand }}</td>
                         <td>{{ car.model }}</td>
@@ -44,8 +44,8 @@
                         <td>{{ car.kilometers }}</td>
                         <td>{{ car.price }}</td>
                         <td>{{ car.createdAt|date('d/m/y') }}</td>
-                        <td><a href="{{ path('app_editOccasions', { id: car.id }) }}" class="btn btn-info">Modifier</a></td>
-                        <td><a href="{{ path('app_deleteOccasions', { id: car.id }) }}" class="btn btn-danger">Supprimer</a></td>
+                        <td><a href="{{ path('app_editOccasions', { id: car.id }) }}" class="btn btn-info"><i class="fa-solid fa-pen"></i></a></td>
+                        <td><a href="{{ path('app_deleteOccasions', { id: car.id }) }}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a></td>
                     </tr>
                 {% endfor %}
                 </tbody>

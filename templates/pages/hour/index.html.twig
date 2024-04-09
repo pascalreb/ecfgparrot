@@ -8,7 +8,7 @@
 
     <h1>Horaires d'ouverture</h1>
 
-    <a href="{{ path('app_hour_new') }}" class="btn btn-primary">Ajouter un horaire</a>
+    <a href="{{ path('app_hour_new') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Ajouter</a>
 
     {% for message in app.flashes('success') %}
         <div class="alert alert-success mt-4">
@@ -18,7 +18,7 @@
 
     <table class="table">
         <thead>
-            <tr>
+            <tr class="text-center">
                 <th>Numéro</th>
                 <th>Jour</th>
                 <th>Ouverture matin</th>
@@ -31,15 +31,15 @@
         </thead>
         <tbody>
         {% for hour in hours %}
-            <tr>
+            <tr class="text-center">
                 <td>{{ hour.id }}</td>
                 <td>{{ hour.day }}</td>
                 <td>{{ hour.openingTime1 ? hour.openingTime1|date('H:i:s') : '' }}</td>
                 <td>{{ hour.closingTime1 ? hour.closingTime1|date('H:i:s') : '' }}</td>
                 <td>{{ hour.openingTime2 ? hour.openingTime2|date('H:i:s') : '' }}</td>
                 <td>{{ hour.closingTime2 ? hour.closingTime2|date('H:i:s') : '' }}</td>
-                <td><a href="{{ path('app_hour_edit', {'id': hour.id}) }}" class="btn btn-info">Modifier</a></td>
-                <td><a href="{{ path('app_hour_delete', {'id': hour.id}) }}" class="btn btn-danger">Supprimer</a></td>
+                <td><a href="{{ path('app_hour_edit', {'id': hour.id}) }}" class="btn btn-info"><i class="fa-solid fa-pen"></i></a></td>
+                <td><a href="{{ path('app_hour_delete', {'id': hour.id}) }}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a></td>
             </tr>
         {% else %}
             <tr>
